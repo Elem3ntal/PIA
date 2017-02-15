@@ -18,4 +18,3 @@ function loadjscssfile(filename, filetype) {
 //SOURCE FILES
 loadjscssfile("JS/currency.js","js");
 loadjscssfile("JS/randomText.js","js");
-loadjscssfile("Sources/icomoon/style.css","css");

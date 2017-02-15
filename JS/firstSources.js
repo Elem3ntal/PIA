@@ -15,14 +15,12 @@ function loadjscssfile(filename, filetype) {
         document.getElementsByTagName("head")[0].appendChild(fileref)
     }
 }
-//Master Source
-loadjscssfile("JS/masterSource.js","js");
-
 //SOURCE FILES
 loadjscssfile("JS/language.js","js");
 loadjscssfile("CSS/body.css","css");
 loadjscssfile("CSS/sideNav.css","css");
 loadjscssfile("CSS/footer.css","css");
+loadjscssfile("Sources/icomoon/style.css","css");
 
 
 /* Set the width of the side navigation to 250px */
