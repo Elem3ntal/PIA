@@ -1,10 +1,10 @@
 function about()
 {
-    $("#main").load("about.html");
+    $("#mainContent").load("about.html");
 }
 function inventory()
 {
-    $("#main").load("inventory.html");
+    $("#mainContent").load("inventory.html");
 }
 function otherServices()
 {

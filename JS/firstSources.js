@@ -20,6 +20,7 @@ loadjscssfile("JS/language.js","js");
 loadjscssfile("CSS/body.css","css");
 loadjscssfile("CSS/sideNav.css","css");
 loadjscssfile("CSS/footer.css","css");
+loadjscssfile("CSS/menu.css","css");
 loadjscssfile("Sources/icomoon/style.css","css");
 
 

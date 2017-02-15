@@ -21,6 +21,7 @@ footer li:hover {
     background-color: #111111;
 }
 footer {
+    z-index: -1;
     position: fixed;
     bottom: 0;
     left: 0;

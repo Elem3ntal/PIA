@@ -14,3 +14,10 @@ html
 body {
     font-family: 'Text-Gyre-Adventor-Regular','Roboto', sans-serif;
 }
+#mainContent{
+    z-index: -2;
+    position: relative;
+    border-color: white;
+    border-style: solid;
+    border-width: 90px 10px 80px 10px;
+}

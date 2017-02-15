@@ -8,20 +8,20 @@
         <title>Products and Managed Inventory</title>
     </head>
     <body>
-        <div id="sideNavMenu">
+        <header>
+            <div id="sideNavMenu">
+                <script>
+                    $("#sideNavMenu").load("sideNavMenu.html");
+                </script>
+            </div>
+            <h1 id="H1Body">The Lenguage is not loading</h1>
+            <a id="botonMenuMovil">Menu
+                <span class="icon-menu" onclick="openNav()"></span>
+            </a>
+        </header>
+        <section id="mainContent">
             <script>
-                $("#sideNavMenu").load("sideNavMenu.html");
-            </script>
-        </div>
-        <h1 id="H1Body">This is a Heading</h1>
-        <hr/>
-        <a id="botonMenuMovil">Menu
-            <span class="icon-menu" onclick="openNav()"></span>
-        </a>
-        <hr/>
-        <section id="main">
-            <script>
-                $("#main").load("about.html");
+                $("#mainContent").load("about.html");
             </script>
         </section>
         <div id="footer">
