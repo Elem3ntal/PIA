@@ -1,0 +1,16 @@
+*
+{
+    padding: 0px;
+    margin: 0px;
+}
+@font-face{
+    font-family:'Text-Gyre-Adventor-Regular';
+    src: url('../Sources/Fonts/texgyreadventor-regular.otf');
+}
+html
+{
+    height:100%;
+}
+body {
+    font-family: 'Text-Gyre-Adventor-Regular','Roboto', sans-serif;
+}
