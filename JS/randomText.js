@@ -8,7 +8,7 @@ function inventory()
 }
 function otherServices()
 {
-
+    alert("Not Implemented");
 }
 //funciones random para llenar el table del inventario
 var nombresColumnas=['ID','Region','Nombre','Stock','Cant','Precio','Descrip','random','familia','Grupo','texto','pais','origen','moneda'];

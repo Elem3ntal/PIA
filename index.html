@@ -10,17 +10,19 @@
         <title>Products and Managed Inventory</title>
     </head>
     <body>
-        <header>
-            <div id="sideNavMenu">
-                <script>
-                    $("#sideNavMenu").load("sideNavMenu.html");
-                </script>
+        <nav class="navbar navbar-inverse" id="header">
+            <div class="navbar-text" >
+                <div id="sideNavMenu">
+                    <script>
+                        $("#sideNavMenu").load("sideNavMenu.html");
+                    </script>
+                </div>
             </div>
-            <h1 id="H1Body">The Lenguage is not loading</h1>
-            <a id="botonMenuMovil">Menu
-                <span class="icon-menu" onclick="openNav()"></span>
+            <a id="botonMenuMovil" onclick="openNav()" class="navbar-text">Menu
+                <span class="icon-menu"></span>
             </a>
-        </header>
+            <h1 id="H1Body" class="navbar-text">The Lenguage is not loading</h1>
+        </nav>
         <section id="mainContent">
             <script>
                 $("#mainContent").load("about.html");
