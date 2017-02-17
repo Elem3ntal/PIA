@@ -16,7 +16,7 @@ function loadjscssfile(filename, filetype) {
     }
 }
 //SOURCE FILES
-loadjscssfile("JS/language.js","js");
+loadjscssfile("JS/Usercontrol.js","js");
 loadjscssfile("CSS/body.css","css");
 loadjscssfile("CSS/sideNav.css","css");
 loadjscssfile("CSS/footer.css","css");

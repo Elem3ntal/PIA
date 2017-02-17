@@ -6,6 +6,7 @@ var words = [
         ['Acerca','About'],
         ['Inventario','Inventary'],
         ['Otros Servicios','Other Services'],
+        ['Iniciar','Login'],
         ['English','Español']
 ];
 
@@ -15,7 +16,8 @@ function setlenguage(){
         document.getElementById("sideNavAbout").innerHTML = words[1][id];
         document.getElementById("sideNavInventary").innerHTML = words[2][id];
         document.getElementById("sideNavOthers").innerHTML = words[3][id];
-        document.getElementById("idiomaFlag").innerHTML = words[4][id];
+        document.getElementById("sideNavLogin").innerHTML = words[4][id];
+        document.getElementById("idiomaFlag").innerHTML = words[5][id];
         //idiomaFlag
         if(id==1){
                 id=0;

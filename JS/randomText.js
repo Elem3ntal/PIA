@@ -5,6 +5,7 @@ function about()
 function inventory()
 {
     $("#mainContent").load("inventory.html");
+    loadjscssfile("JS/inventory.js","js");
 }
 function otherServices()
 {
@@ -53,11 +54,11 @@ function llenarTabla(){
     myTableDiv.appendChild(table)
 }
 
-function palabraRandom(){
-    var salida="";
-    for (i2=0;i2<Math.floor(Math.random()*6);i2++){
-        var res = String.fromCharCode(Math.floor(Math.random()*26)+71);
-        salida+=res;
+    function palabraRandom(){
+        var salida="";
+        for (i2=0;i2<Math.floor((Math.random()*5)+2);i2++){
+            var res = String.fromCharCode(Math.floor(Math.random()*26)+65);
+            salida+=res;
+        }
+        return salida;
     }
-    return salida;
-}
