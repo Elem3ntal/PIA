@@ -13,10 +13,42 @@ html
 }
 body {
     font-family: 'Text-Gyre-Adventor-Regular','Roboto', sans-serif;
-   position: relative;
+    position: relative;
 }
 #mainContent{
-   min-height: 400px;
-   margin-bottom: 100px;
-   clear: both;
+    min-height: 400px;
+    margin-bottom: 100px;
+    clear: both;
+}
+#login{
+    align-content: center;
+    width: 120px;
+    position: relative;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+#login input{
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+#LoginIniciate {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    background: #333333;
+    text-align: center;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+#LoginIniciate:visited, #LoginIniciate:link, #LoginIniciate:hover, #LoginIniciate:active {
+    text-decoration: none;
+    background:#111111;
+}
+
+#botonMenuMovil:visited, #botonMenuMovil:link, #botonMenuMovil:hover, #botonMenuMovil:active {
+    text-decoration: none;
+    background:#111111;
+    color: #f1f1f1;
 }

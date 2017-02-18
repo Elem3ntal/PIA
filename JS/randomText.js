@@ -11,6 +11,11 @@ function otherServices()
 {
     alert("Not Implemented");
 }
+function loadLogin()
+{
+    $("#mainContent").load("login.html");
+    loadjscssfile("JS/inventory.js","js");
+}
 //funciones random para llenar el table del inventario
 var nombresColumnas=['ID','Region','Nombre','Stock','Cant','Precio','Descrip','random','familia','Grupo','texto','pais','origen','moneda'];
 function llenarTabla(){

@@ -5,3 +5,10 @@
 //3: puede modificar inventario y usuarios.
 
 var userLevel=0;
+function login(){
+    var user = parseInt(document.getElementById("loginUser").value);
+    var pass = parseInt(document.getElementById("loginPass").value);
+    if(user==pass){
+        alert(user);
+    }
+}
