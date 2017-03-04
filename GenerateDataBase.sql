@@ -169,6 +169,40 @@ BEGIN
 	ON Bought.Bought_id = Bought_Bought_id
 	WHERE Bought.Users_Users_id=id;
 END//
+
+CREATE PROCEDURE GetVentas (IN id INT)
+BEGIN
+	SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
+	FROM Bought
+	INNER JOIN Sold
+	ON Bought.Bought_id = Bought_Bought_id
+	WHERE Sold.Users_Users_id=id;
+END//
+
+CREATE PROCEDURE GetCompras (IN id INT)
+BEGIN
+	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
+	FROM Bought
+	WHERE Users_Users_id=id;
+END//
+
+CREATE PROCEDURE GetComprasPorFecha(IN id INT,IN anio INT,IN mes INT)
+BEGIN
+	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
+	FROM Bought
+	WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id;
+END//
+CREATE PROCEDURE vender(in produc_id int, in usuario int, in cant int, OUT hecho varchar(1))
+begin
+	select Inventory_Cant INTO @col1priv FROM Inventory WHERE Inventory_id = 1 and (Inventory_Cant - cant > 0);
+	if ((@col1priv - cant )>0) then
+		UPDATE Inventory set Inventory_Cant = Inventory_Cant - cant
+		WHERE Users_Users_id = usuario AND Inventory_id = produc_id;
+        set hecho = 'V';
+	else
+		set hecho = 'F';
+    end if;
+end//
 delimiter ;
 
 INSERT INTO Users (Users_name, Users_pass)

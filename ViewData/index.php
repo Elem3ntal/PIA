@@ -47,7 +47,7 @@ echo "</table>";
 $sql="SELECT * FROM PIA.Bought";
 $result = mysqli_query($con,$sql);
 
-echo "<h1>Table Users</h1>
+echo "<h1>Table Bought</h1>
 <table>
 <tr>
 <th>Bought_ID</th>
@@ -67,6 +67,33 @@ while($row = mysqli_fetch_array($result)) {
     echo "<td>" . $row['Bought_cost'] . "</td>";
     echo "<td>" . $row['Bought_date'] . "</td>";
     echo "<td>" . $row['Users_Users_id'] . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+
+$sql="SELECT * FROM PIA.Sold";
+$result = mysqli_query($con,$sql);
+
+echo "<h1>Table Sold</h1>
+<table>
+<tr>
+<th>Sold_id</th>
+<th>Users_Users_id</th>
+<th>Clients_Clients_id</th>
+<th>Sold_Price</th>
+<th>Sold_Units</th>
+<th>Sold_Date</th>
+<th>Bought_Bought_id</th>
+</tr>";
+while($row = mysqli_fetch_array($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['Sold_id'] . "</td>";
+    echo "<td>" . $row['Users_Users_id'] . "</td>";
+    echo "<td>" . $row['Clients_Clients_id'] . "</td>";
+    echo "<td>" . $row['Sold_Price'] . "</td>";
+    echo "<td>" . $row['Sold_Units'] . "</td>";
+    echo "<td>" . $row['Sold_Date'] . "</td>";
+    echo "<td>" . $row['Bought_Bought_id'] . "</td>";
     echo "</tr>";
 }
 echo "</table>";
