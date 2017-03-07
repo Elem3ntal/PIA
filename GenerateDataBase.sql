@@ -161,6 +161,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 --  routine1
 -- -----------------------------------------------------
 delimiter //
+CREATE PROCEDURE Login(in _user varchar(45), in _pass varchar(45))
+BEGIN
+	SELECT Users_id
+	FROM Users
+	WHERE Users_name=_user AND Users_pass=_pass;
+END//
 CREATE PROCEDURE GetInventario (IN id INT)
 BEGIN
 	SELECT Bought_id, Bought_descrip, Inventory_Cant, Bought_Sold, Bought_date
@@ -179,6 +185,15 @@ BEGIN
 	WHERE Sold.Users_Users_id=id;
 END//
 
+CREATE PROCEDURE GetVentasPorMes (IN id INT,IN anio INT,IN mes INT)
+BEGIN
+	SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
+	FROM Bought
+	INNER JOIN Sold
+	ON Bought.Bought_id = Bought_Bought_id
+	WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id;
+END//
+
 CREATE PROCEDURE GetCompras (IN id INT)
 BEGIN
 	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
@@ -186,7 +201,7 @@ BEGIN
 	WHERE Users_Users_id=id;
 END//
 
-CREATE PROCEDURE GetComprasPorFecha(IN id INT,IN anio INT,IN mes INT)
+CREATE PROCEDURE GetComprasPorMes(IN id INT,IN anio INT,IN mes INT)
 BEGIN
 	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
 	FROM Bought
@@ -240,11 +255,6 @@ VALUES ('2017-03-02', 49, 1, 1),
 ('2017-03-02', 212, 2, 10),
 ('2017-03-02', 10, 3, 11),
 ('2017-03-02', 10, 4, 12);
---  `Inventory_id` INT NOT NULL AUTO_INCREMENT,
---  `Inventory_ArrivalDate` DATE NULL,
---  `Inventory_Cant` INT NULL,
---  `Users_Users_id` INT NOT NULL,
---  `Bought_Bought_id` INT NOT NULL,
 
 INSERT INTO Sold (Users_Users_id, Clients_Clients_id, Sold_Price, Sold_Units, Sold_Date, Bought_Bought_id)
 VALUES (1, NULL, 20000,1,'2017-03-02',1),
@@ -253,10 +263,17 @@ VALUES (1, NULL, 20000,1,'2017-03-02',1),
 (4, NULL, 20000,1,'2017-03-02',4),
 (5, NULL, 20000,1,'2017-03-02',5),
 (6, NULL, 20000,1,'2017-03-02',6);
---  `Sold_id` INT NOT NULL AUTO_INCREMENT,
---  `Users_Users_id` INT NOT NULL,
---  `Clients_Clients_id` INT NULL,
---  `Sold_Price` INT NULL,
---  `Sold_Units` INT NULL,
---  `Sold_Date` DATE NULL,
---  `Bought_Bought_id` INT NOT NULL,
+
+DELIMITER $$
+CREATE FUNCTION CrearUsuario (_user VARCHAR(45), _pass VARCHAR(45)) RETURNS INTEGER
+BEGIN
+	INSERT INTO PIA.Users (Users_name, Users_pass) VALUES (_user, _pass);
+	RETURN 1;
+END$$
+
+CREATE FUNCTION VerificarUsuario(_user varchar(45))
+returns INT UNSIGNED
+begin
+	select count(*) into @salida from PIA.Users WHERE Users_name = _user;
+    return @salida;
+end$$

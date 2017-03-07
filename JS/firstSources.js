@@ -16,17 +16,4 @@ function loadjscssfile(filename, filetype) {
     }
 }
 //SOURCE FILES
-loadjscssfile("CSS/body.css","css");
-loadjscssfile("Sources/icomoon/style.css","css");
-
-
-/* Set the width of the side navigation to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-
+//loadjscssfile("CSS/body.css","css");
