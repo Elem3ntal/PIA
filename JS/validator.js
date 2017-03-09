@@ -4,21 +4,21 @@ function validator(){
          console.log("no problems with the master");
       }
       else{
-         window.location.href = 'index.html';
+         window.location.href = '/PIA/index.html';
       }
    }
    catch(err) {
-      window.location.href = 'index.html';
+      window.location.href = '/PIA/index.html';
    }
    try{
       if(user==true){
       }
       else{
-         $("#main").load('Sites/login.php');
+         $("#main").load('/PIA/Sites/login.php');
       }
    }
    catch(err) {
-      $("#main").load('Sites/login.php');
+      $("#main").load('/PIA/Sites/login.php');
    }
 }
 validator();

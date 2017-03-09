@@ -10,8 +10,8 @@ if($variable[0]=="exit"){
 }
 ?>
 
-<script src="JS/validator.js"></script>
-<script src='JS/InsideSources.js'></script>
+<script src='/PIA/JS/validator.js'></script>
+<script src='/PIA/JS/InsideSources.js'></script>
 <script>
     var destroy = ""+ <?php echo $destroy; ?>;
     if(destroy==1){
