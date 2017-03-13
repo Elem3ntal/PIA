@@ -163,59 +163,60 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 delimiter //
 CREATE PROCEDURE Login(in _user varchar(45), in _pass varchar(45))
 BEGIN
-	SELECT Users_id
-	FROM Users
-	WHERE Users_name=_user AND Users_pass=_pass;
+  SELECT Users_id
+  FROM Users
+  WHERE Users_name=_user AND Users_pass=_pass;
 END//
 CREATE PROCEDURE GetInventario (IN id INT)
 BEGIN
-	SELECT Bought_id, Bought_descrip, Inventory_Cant, Bought_Sold, Bought_date
-	FROM Bought
-	INNER JOIN Inventory
-	ON Bought.Bought_id = Bought_Bought_id
-	WHERE Bought.Users_Users_id=id;
+  SELECT Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
+  FROM Bought
+  INNER JOIN Inventory
+  ON Bought.Bought_id = Bought_Bought_id
+  WHERE Bought.Users_Users_id=id;
 END//
 
 CREATE PROCEDURE GetVentas (IN id INT)
 BEGIN
-	SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
-	FROM Bought
-	INNER JOIN Sold
-	ON Bought.Bought_id = Bought_Bought_id
-	WHERE Sold.Users_Users_id=id;
+  SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
+  FROM Bought
+  INNER JOIN Sold
+  ON Bought.Bought_id = Bought_Bought_id
+  WHERE Sold.Users_Users_id=id;
 END//
 
 CREATE PROCEDURE GetVentasPorMes (IN id INT,IN anio INT,IN mes INT)
 BEGIN
-	SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
-	FROM Bought
-	INNER JOIN Sold
-	ON Bought.Bought_id = Bought_Bought_id
-	WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id;
+  SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
+  FROM Bought
+  INNER JOIN Sold
+  ON Bought.Bought_id = Bought_Bought_id
+  WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id;
 END//
 
 CREATE PROCEDURE GetCompras (IN id INT)
 BEGIN
-	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
-	FROM Bought
-	WHERE Users_Users_id=id;
+  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_cant, Bought_date
+  FROM Bought
+  WHERE Users_Users_id=id;
 END//
 
 CREATE PROCEDURE GetComprasPorMes(IN id INT,IN anio INT,IN mes INT)
 BEGIN
-	SELECT Bought_descrip, Bought_cost, Bought_cant, Bought_date
-	FROM Bought
-	WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id;
+  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_cant, Bought_date
+  FROM Bought
+  WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id;
 END//
+
 CREATE PROCEDURE vender(in produc_id int, in usuario int, in cant int, OUT hecho varchar(1))
 begin
-	select Inventory_Cant INTO @col1priv FROM Inventory WHERE Inventory_id = 1 and (Inventory_Cant - cant > 0);
-	if ((@col1priv - cant )>0) then
-		UPDATE Inventory set Inventory_Cant = Inventory_Cant - cant
-		WHERE Users_Users_id = usuario AND Inventory_id = produc_id;
+  select Inventory_Cant INTO @col1priv FROM Inventory WHERE Inventory_id = 1 and (Inventory_Cant - cant > 0);
+  if ((@col1priv - cant )>0) then
+    UPDATE Inventory set Inventory_Cant = Inventory_Cant - cant
+    WHERE Users_Users_id = usuario AND Inventory_id = produc_id;
         set hecho = 'V';
-	else
-		set hecho = 'F';
+  else
+    set hecho = 'F';
     end if;
 end//
 delimiter ;
@@ -226,7 +227,7 @@ VALUES ('sebapini', '9e7520594c505e4cbb95f0ca8aa30063'),
 ('jonas', '9c5ddd54107734f7d18335a5245c286b'),
 ('gato', '70b783251225354e883a5bef3c011843'),
 ('perro', 'd44b121fc3524fe5cdc4f3feb31ceb78'),
-('user', 'ee11cbb19052e40b07aac0ca060c23ee'); 
+('user', 'ee11cbb19052e40b07aac0ca060c23ee');
 
 INSERT INTO Bought (Bought_descrip, Bought_cost, Bought_cant, Bought_Sold, Bought_date, Users_Users_id)
 VALUES ('Lentes de Sol', 10000, 50, 20000, '2017-02-01', 1),
@@ -267,13 +268,13 @@ VALUES (1, NULL, 20000,1,'2017-03-02',1),
 DELIMITER $$
 CREATE FUNCTION CrearUsuario (_user VARCHAR(45), _pass VARCHAR(45)) RETURNS INTEGER
 BEGIN
-	INSERT INTO PIA.Users (Users_name, Users_pass) VALUES (_user, _pass);
-	RETURN 1;
+  INSERT INTO PIA.Users (Users_name, Users_pass) VALUES (_user, _pass);
+  RETURN 1;
 END$$
 
 CREATE FUNCTION VerificarUsuario(_user varchar(45))
 returns INT UNSIGNED
 begin
-	select count(*) into @salida from PIA.Users WHERE Users_name = _user;
+  select count(*) into @salida from PIA.Users WHERE Users_name = _user;
     return @salida;
 end$$

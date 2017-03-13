@@ -31,7 +31,7 @@ if($variable[0]=="exit"){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" id="HeaderPart2" onclick="NavBar(0)">WebSiteName</a>
+                <a class="navbar-brand" id="HeaderPart2" onclick="NavBar(0)">PIA</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">

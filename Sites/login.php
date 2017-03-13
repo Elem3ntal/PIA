@@ -2,7 +2,7 @@
 include("config.php");
 session_start();
 $inside = 0;
-$error = "php iniciado";
+$error = "";
 $variable = explode(",", $_GET["q"]);
 if($variable[0]!=""){
    $user=mysqli_real_escape_string($db,$variable[0]);
