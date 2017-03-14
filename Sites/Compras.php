@@ -43,6 +43,7 @@ try{
 <th>Cantidad</th>
 <th>Costo</th>
 <th>Venta</th>
+<th>Ren %</th>
 <th>Fecha</th>
 </tr>";
     //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
@@ -50,9 +51,10 @@ try{
         echo "<tr>";
         echo "<td>" . $row['Bought_id'] . "</td>";
         echo "<td>" . $row['Bought_descrip'] . "</td>";
-        echo "<td>" . number_format($row['Inventory_Cant'], 0) . "</td>";
+        echo "<td>" . number_format($row['Bought_cant'], 0) . "</td>";
         echo "<td>" . "$".number_format($row['Bought_cost'], 0) . "</td>";
         echo "<td>" . "$".number_format($row['Bought_Sold'], 0) . "</td>";
+        echo "<td>" . round((($row['Bought_Sold']-$row['Bought_cost'])/$row['Bought_cost']), 2)."%" . "</td>";
         echo "<td>" . $row['Bought_date'] . "</td>";
         echo "</tr>";
     }

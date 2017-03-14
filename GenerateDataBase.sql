@@ -196,14 +196,14 @@ END//
 
 CREATE PROCEDURE GetCompras (IN id INT)
 BEGIN
-  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_cant, Bought_date
+  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_Sold, Bought_cant, Bought_date
   FROM Bought
   WHERE Users_Users_id=id;
 END//
 
 CREATE PROCEDURE GetComprasPorMes(IN id INT,IN anio INT,IN mes INT)
 BEGIN
-  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_cant, Bought_date
+  SELECT Bought_id, Bought_descrip, Bought_cost, Bought_Sold, Bought_cant, Bought_date
   FROM Bought
   WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id;
 END//
