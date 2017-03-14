@@ -43,7 +43,7 @@ try{
         $ganancia = ($row['Bought_Sold']-$row['Bought_cost']);
         echo "<td>" . "$".number_format($ganancia, 0) . "</td>";
         $invPronost += ($ganancia*$row['Inventory_Cant']);
-        echo "<td>" . round(($ganancia/$row['Bought_cost']), 2).'%' . "</td>";
+        echo "<td>" . round(($ganancia*100/$row['Bought_cost']), 2).'%' . "</td>";
         echo "<td>" . $row['Bought_date'] . "</td>";
         echo "</tr>";
     }

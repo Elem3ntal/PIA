@@ -54,7 +54,7 @@ try{
         echo "<td>" . number_format($row['Bought_cant'], 0) . "</td>";
         echo "<td>" . "$".number_format($row['Bought_cost'], 0) . "</td>";
         echo "<td>" . "$".number_format($row['Bought_Sold'], 0) . "</td>";
-        echo "<td>" . round((($row['Bought_Sold']-$row['Bought_cost'])/$row['Bought_cost']), 2)."%" . "</td>";
+        echo "<td>" . round(((($row['Bought_Sold']-$row['Bought_cost'])*100)/$row['Bought_cost']), 2)."%" . "</td>";
         echo "<td>" . $row['Bought_date'] . "</td>";
         echo "</tr>";
     }
