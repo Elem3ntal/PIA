@@ -40,6 +40,9 @@ else{
       var pass = document.getElementById("password").value;
       $("#main").load("Sites/login.php?q="+user+","+pass);
    }
+   function ChangeToRegistrer(){
+      $("#main").load("/PIA/Sites/register.php");
+   }
 </script>
 <div id="main2">
    <div style = "width:300px; border: solid 1px #333333; " align = "left">
@@ -48,6 +51,8 @@ else{
          <label>UserName  :</label><input type = "text" id="username" class = "box"/><br /><br />
          <label>Password  :</label><input type = "password" id="password" class = "box" /><br/><br />
          <a onclick="login();">Submit</a>
+         <br/>
+         <a onclick="ChangeToRegistrer();">Registrer FREE!</a>
       </form>
       <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
    </div>

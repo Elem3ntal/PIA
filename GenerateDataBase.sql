@@ -167,6 +167,12 @@ BEGIN
   FROM Users
   WHERE Users_name=_user AND Users_pass=_pass;
 END//
+CREATE PROCEDURE checkUser(IN _user varchar(45))
+BEGIN
+	SELECT count(*)
+	FROM PIA.Users
+	WHERE Users_name = _user;
+END//
 CREATE PROCEDURE GetInventario (IN id INT)
 BEGIN
   SELECT Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
