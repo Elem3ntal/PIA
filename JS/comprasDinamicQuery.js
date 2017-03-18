@@ -6,8 +6,6 @@ function fechaSig() {
     else{
         mes+=1;
     }
-    document.getElementById('year').innerHTML = 'Año: '+anio;
-    document.getElementById('mes').innerHTML = 'mes: '+mes;
     $("#BodyInside").load("/PIA/Sites/Compras.php?q="+anio+","+mes);
 }
 function fechaAnt() {
@@ -18,16 +16,15 @@ function fechaAnt() {
     else{
         mes-=1;
     }
-    document.getElementById('year').innerHTML = 'Año: '+anio;
-    document.getElementById('mes').innerHTML = 'mes: '+mes;
     $("#BodyInside").load("/PIA/Sites/Compras.php?q="+anio+","+mes);
 }
 function fechaToday(auto){
     var anio = new Date().getFullYear();
     var mes = new Date().getMonth()+1;
-    document.getElementById('year').innerHTML = 'Año: '+anio;
-    document.getElementById('mes').innerHTML = 'mes: '+mes;
     if(auto!=0){
         NavBar(3);
     }
+}
+function cargarCompraNueva() {
+    $("#compraNueva").load("/PIA/Sites/IngresarCompras.php");
 }

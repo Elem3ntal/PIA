@@ -3,7 +3,7 @@
 <?php
 include("config.php");
 session_start();
-debug('Vista de Ventas en PIA');
+debug('Vista de Clientes (Ventas) en PIA');
 debug('Usuario ID: '.$_SESSION['loginID']);
 $URL = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 debug('Visitando: '.$URL);
@@ -15,4 +15,3 @@ catch (Throwable $t) {
 }
 mysqli_close($con);
 ?>
-<a onclick="">Clientes</a>

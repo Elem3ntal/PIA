@@ -52,7 +52,8 @@ if($variable[0]=="exit"){
         </script>
     </section>
 </section>
-<section id="footerInside">
+<br><br>
+<section class="navbar-fixed-bottom" id="footerInside">
     <a onclick="logout();">logout</a>
     <p>Sitio en Construcción</p>
     <p>Creditos: &copy;Elem3ntal Development</p>

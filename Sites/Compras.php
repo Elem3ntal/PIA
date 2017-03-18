@@ -32,7 +32,8 @@ try{
     $sql = "CALL GetComprasPorMes(".$_SESSION['loginID'].",".$anio.",".$mes.");";
     $result = mysqli_query($db,$sql);
     echo "<h1>Compras</h1>
-<a></a>
+    <a id='RegistrarCompra' onclick='cargarCompraNueva()'>Registrar compras</a>
+    <section id='compraNueva'></section>
 <a id='year' onclick='fechaAnt()'>Anterior</a>
 <a id='Today' onclick='fechaToday(1)'>Hoy</a>
 <a id='mes' onclick='fechaSig()'>Siguiente</a>

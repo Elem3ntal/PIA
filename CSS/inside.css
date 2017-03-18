@@ -5,16 +5,19 @@ body {
     height:100%;
 }
 #BodyInside{
-   padding:10px;
-   padding-bottom:150px;
+    position: relative;
+    padding:10px;
+    padding-bottom:150px;
 }
 /*Footer*/
 #footerInside{
-    position:absolute;
+    display: block;
+    position: fixed;
     bottom:0;
     width:100%;
     height:150px;   /* Height of the footer */
     background:#6cf;
+    margin: 0px auto;
 }
 #footerInside ul{
     list-style-type: none;

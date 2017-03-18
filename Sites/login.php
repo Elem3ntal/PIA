@@ -43,13 +43,22 @@ else{
    function ChangeToRegistrer(){
       $("#main").load("/PIA/Sites/register.php");
    }
+   function enviarUsuario(e){
+      // look for window.event in case event isn't passed in
+      e = e || window.event;
+      if (e.keyCode == 13)
+      {
+         console.log('Key Enter Detected');
+         login();
+      }
+   }
 </script>
 <div id="main2">
    <div style = "width:300px; border: solid 1px #333333; " align = "left">
       <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
       <form action = "" method = "post">
          <label>UserName  :</label><input type = "text" id="username" class = "box"/><br /><br />
-         <label>Password  :</label><input type = "password" id="password" class = "box" /><br/><br />
+         <label>Password  :</label><input type = "password" id="password" class = "box" onkeyup='enviarUsuario(event);'/><br/><br />
          <a onclick="login();">Submit</a>
          <br/>
          <a onclick="ChangeToRegistrer();">Registrer FREE!</a>
