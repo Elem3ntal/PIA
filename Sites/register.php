@@ -91,7 +91,66 @@ include("config.php");
          document.getElementById("password2").style.backgroundColor="yellow";
       }
    }
+   function checkEmailFormart(){
+      var inputElem = document.getElementById("email");
+      var stra = document.getElementById("email").value;
+      if(stra.length>10){
+         if(stra.indexOf('@')==stra.lastIndexOf('@')){
+            if(stra.lastIndexOf('.')>stra.indexOf('@')){
+               inputElem.style.backgroundColor = "green";
+               return 1;
+            }
+            inputElem.style.backgroundColor = "yellow";
+
+            return 0;
+         }
+         inputElem.style.backgroundColor = "yellow";
+
+         return 0;
+      }
+      else{
+         inputElem.style.backgroundColor = "";
+         return 0;
+      }
+   }
+   function checkEmail(){
+      if(checkEmailFormart()==0){
+         return;
+      }
+      var inputElem = document.getElementById("email");
+      var stra = document.getElementById("email").value;
+      console.log(stra);
+      if (stra.length == 0) {
+         if (inputElem.value == "") {
+            inputElem.style.backgroundColor = "";
+            return;
+         }
+      }
+      if (window.XMLHttpRequest) {
+         // code for IE7+, Firefox, Chrome, Opera, Safari
+         xmlhttp=new XMLHttpRequest();
+      } else {  // code for IE6, IE5
+         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange=function() {
+         if (this.readyState==4 && this.status==200) {
+            retorno = this.responseText;
+            inputElem.style.backgroundColor = "yellow";
+            if(retorno==1){
+               inputElem.style.backgroundColor = "red";
+            }
+            else{
+               inputElem.style.backgroundColor = "green";
+            }
+         }
+         else{
+         }
+      }
+      xmlhttp.open("GET","/PIA/Sites/checkEmail.php?q="+stra,true);
+      xmlhttp.send();
+   }
 </script>
-<label>UserName:</label><input type = "text" id="username" class = "box" onkeyup = "showResult();"/><br/>
-<label>Password:</label><input type = "password" id="password" class = "box" /><br/>
-<label>Reinsert Password:</label><input type = "password" id="password2" class = "box" onkeyup = "checkPassword();return searchKeyPress(event);"/><br/>
+<p>UserName:</p><input type = "text" id="username" class = "box" onkeyup = "showResult();"/><br/>
+<p>Password:</p><input type = "password" id="password" class = "box" /><br/>
+<p>Reinsert Password:</p><input type = "password" id="password2" class = "box" onkeyup = "checkPassword();"/><br/>
+<p>Email: </p><input type = "text" id="email" class = "box" onkeyup = "checkEmail();return searchKeyPress(event);"/>
