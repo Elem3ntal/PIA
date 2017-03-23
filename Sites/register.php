@@ -40,6 +40,7 @@ include("config.php");
       var pass1 = document.getElementById("password").value;
       var pass2 = document.getElementById("password2").value;
       var user = document.getElementById("username").value;
+      var email = document.getElementById("email").value;
       if(user.length > 6 && pass1==pass2){
          if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -55,13 +56,13 @@ include("config.php");
                   $("#main").load("/PIA/Sites/login.php");
                }
                else{
-                  alert("no return found");
+                  alert("no return found: "+retorno);
                }
             }
             else{
             }
          }
-         xmlhttp.open("GET","/PIA/Sites/registerNewUser.php?q="+user+','+pass1,true);
+         xmlhttp.open("GET","/PIA/Sites/registerNewUser.php?q="+user+','+pass1+','+email,true);
          xmlhttp.send();
       }
    }

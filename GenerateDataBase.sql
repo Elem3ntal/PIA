@@ -238,7 +238,7 @@ delimiter ;
 /* Users_type 0 Nuevo, 1 verificado, 2cuenta suspendida*/
 INSERT INTO Users (Users_name, Users_pass,Users_type)
 VALUES ('sebapini', '9e7520594c505e4cbb95f0ca8aa30063',0),
-('javier', '3c9c03d6008a5adf42c2a55dd4a1a9f2',1),
+('javier', '3c9c03d6008a5adf42c2a55dd4a1a9f2',0),
 ('jonas', '9c5ddd54107734f7d18335a5245c286b',0),
 ('gato', '70b783251225354e883a5bef3c011843',0),
 ('perro', 'd44b121fc3524fe5cdc4f3feb31ceb78',0),
@@ -293,9 +293,15 @@ BEGIN
   RETURN 1;
 END$$
 
-CREATE FUNCTION VerificarUsuario(_user varchar(45))
-returns INT UNSIGNED
-begin
-  select count(*) into @salida from PIA.Users WHERE Users_name = _user;
+CREATE FUNCTION VerificarUsuario(_user varchar(45)) RETURNS INT UNSIGNED
+BEGIN
+	SELECT COUNT(*) into @salida from PIA.Users WHERE Users_name = _user;
     return @salida;
 end$$
+
+CREATE FUNCTION VerificarEmail(_email varchar(45)) RETURNS INT UNSIGNED
+BEGIN
+	SELECT Users_Users_id into @UserID From PIA.ExtraData WHERE ExtraData_email = _email;
+    UPDATE PIA.Users SET Users_type = 1 Where Users_id = @UserID;
+    RETURN 1;
+END$$
