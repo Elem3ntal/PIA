@@ -10,7 +10,7 @@ define('DB_PASSWORD', 'qwerasd123');
 define('DB_DATABASE', 'PIA');
 $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 //debug in true to show, false to hide the info.
-define('DEBUG',true);
+define('DEBUG',false);
 function debug(string $mensaje){
     if(DEBUG==true){
         echo "<p id='debugMessage'>" .$mensaje ."</p>";

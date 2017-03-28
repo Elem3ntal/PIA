@@ -305,3 +305,13 @@ BEGIN
     UPDATE PIA.Users SET Users_type = 1 Where Users_id = @UserID;
     RETURN 1;
 END$$
+
+CREATE FUNCTION ingresarCompra(_descrip VARCHAR(45), _cost INT, _cant INT, _Sold INT, _id INT) RETURNS INT UNSIGNED
+BEGIN
+	INSERT INTO PIA.Bought (Bought_descrip, Bought_cost, Bought_cant, Bought_Sold, Bought_date, Users_Users_id)
+    VALUES (_descrip,_cost,_cant,_Sold,NOW(),_id);
+    SELECT Bought_id INTO @productID FROM PIA.Bought ORDER BY Bought_id DESC LIMIT 1;
+    INSERT INTO PIA.Inventory (Inventory_ArrivalDate,Inventory_Cant,Users_Users_id,Bought_Bought_id)
+	VALUES (NOW(),_cant,_id,@productID);
+	RETURN 1;
+END$$

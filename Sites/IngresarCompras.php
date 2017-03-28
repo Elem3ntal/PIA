@@ -1,4 +1,5 @@
 <script src='/PIA/JS/validator.js'></script>
+<script src='/PIA/JS/IngresarCompras.js'></script>
 <link rel="stylesheet" type="text/css" href="/PIA/CSS/tablas.css">
 <?php
 include("config.php");
@@ -15,40 +16,47 @@ catch (Throwable $t) {
 }
 mysqli_close($con);
 ?>
-<script>
-    function agregarFila(){
-        var table = document.getElementById("tablaIngresarCompras");
-        var descripcion = document.getElementById("IngresoDescripcion").value;
-        var cantidad = document.getElementById("IngresoCantidad").value;
-        var precio = document.getElementById("IngresoPrecio").value;
-        var venta = document.getElementById("IngresoVenta").value;
-        document.getElementById("IngresoDescripcion").value = "";
-        document.getElementById("IngresoCantidad").value = "";
-        document.getElementById("IngresoPrecio").value = "";
-        document.getElementById("IngresoVenta").value = "";
-        var row = table.insertRow(1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
-        cell1.innerHTML = descripcion;
-        cell2.innerHTML = cantidad;
-        cell3.innerHTML = precio;
-        cell4.innerHTML = venta;
-        cell5.innerHTML = ((venta-precio)/precio).toFixed(2)+'%';
-        var d = new Date();
-        cell6.innerHTML = d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear();
-    }
-</script>
-<p>Productos</p><a>(-)</a><a onclick="agregarFila()">(+)</a>
-<input type = "text" id="IngresoDescripcion" class = "box" placeholder="Descripcion"/>
-<input type = "text" id="IngresoCantidad" class = "box" placeholder="Cant"/>
-<input type = "text" id="IngresoPrecio" class = "box" placeholder="Precio"/>
-<input type = "text" id="IngresoVenta" class = "box" placeholder="Venta"/>
+
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#agregarProductos">Agregar</a></li>
+        <li><a data-toggle="tab" href="#eliminarProductos">eliminar</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="agregarProductos" class="tab-pane fade in active">
+            <h3>Agregar</h3>
+            <input type = "text" id="IngresoDescripcion" onkeypress="hideAlerts()" class = "box" placeholder="Descripcion"/>
+            <input type = "text" id="IngresoCantidad" onkeypress="hideAlerts()" class = "box" placeholder="Cant"/>
+            <input type = "text" id="IngresoPrecio" onkeypress="hideAlerts()" class = "box" placeholder="Precio"/>
+            <input type = "text" id="IngresoVenta" onkeypress="hideAlerts()" class = "box" placeholder="Venta"/>
+            <a onclick="agregarFila()">( + )</a>
+        </div>
+        <div id="eliminarProductos" class="tab-pane fade">
+            <h3>Eliminar</h3>
+            <input type = "text" id="EliminarID" onkeypress="hideAlerts()" class = "box" placeholder="ID to Delete"/>
+            <a onclick="eliminarID()">( - )</a>
+        </div>
+    </div>
+</div>
+<section id="notificationArea">
+    <div class="alert alert-success">
+        <strong>Producto Agregado!</strong> El producto ya se encuentra en inventario.
+    </div>
+    <div class="alert alert-warning" id="alertIncompleto"> <!--Producto incompleto-->
+        <strong>Producto NO agregado!</strong> faltan valores por ingresar
+    </div>
+    <div class="alert alert-warning" id="alertEliminado"> <!--Producto Eliminado de la fila-->
+        <strong>Producto No Agregado!</strong> Eliminado de la fila.
+    </div>
+    <div class="alert alert-info" id="alertCompleto">
+        <strong>Producto Agregado!</strong>ha sido añadido a la cola.
+    </div>
+
+</section>
 <table id = "tablaIngresarCompras">
     <tr>
+        <th>ID(temp)</th>
         <th>Descripcion</th>
         <th>Cantidad</th>
         <th>Precio</th>
@@ -57,3 +65,4 @@ mysqli_close($con);
         <th>Fecha</th>
     </tr>
 </table>
+<a onclick="ingregarComprasAInventario()">Load to Inventory</a>
