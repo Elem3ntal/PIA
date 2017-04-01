@@ -31,9 +31,12 @@ debug('Visitando: '.$URL);
 try{
     $sql = "CALL GetComprasPorMes(".$_SESSION['loginID'].",".$anio.",".$mes.");";
     $result = mysqli_query($db,$sql);
-    echo "<h1>Compras</h1>
+    echo "<div class=\"container-fluid\">
+    <h1>Compras</h1>
     <a id='RegistrarCompra' onclick='cargarCompraNueva()'>Registrar compras</a>
+    </div>
     <section id='compraNueva'></section>
+<div class=\"container-fluid\">
 <a id='year' onclick='fechaAnt()'>Anterior</a>
 <a id='Today' onclick='fechaToday(1)'>Hoy</a>
 <a id='mes' onclick='fechaSig()'>Siguiente</a>
@@ -46,7 +49,8 @@ try{
 <th>Venta</th>
 <th>Ren %</th>
 <th>Fecha</th>
-</tr>";
+</tr>
+</div>";
     //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
     while($row = mysqli_fetch_array($result)) {
         echo "<tr>";

@@ -28,7 +28,7 @@ function agregarFila(){
     cell3.innerHTML = cantidad;
     cell4.innerHTML = precio;
     cell5.innerHTML = venta;
-    cell6.innerHTML = ((venta-precio)/precio).toFixed(2)+'%';
+    cell6.innerHTML = (((venta-precio)/precio)*100).toFixed(2)+'%';
     var d = new Date();
     cell7.innerHTML = d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear();
     $("#alertCompleto").show();
@@ -48,6 +48,14 @@ function eliminarID(){
         }
     }
 }
+function limpiarTabla(){
+    var table = document.getElementById('tablaIngresarCompras');
+    var rows = table.rows.length;
+    for (var i = 1; i <= rows-1; i++) {
+        table.deleteRow(1);
+    }
+    productos=1;
+}
 function ingregarComprasAInventario(){
     var table = document.getElementById('tablaIngresarCompras');
     var rows = table.rows;
@@ -59,7 +67,6 @@ function ingregarComprasAInventario(){
         colCant = row.cells[2].innerHTML;
         colPrecio = row.cells[3].innerHTML;
         colVenta = row.cells[4].innerHTML;
-        alert(colDescrip+', '+colCant+', '+colPrecio+', '+colVenta);
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp=new XMLHttpRequest();
@@ -83,4 +90,6 @@ function ingregarComprasAInventario(){
         xmlhttp.open("GET","/PIA/Sites/registerNewBuy.php?q="+colDescrip+","+colPrecio+','+colCant+','+colVenta,true);
         xmlhttp.send();
     }
+    limpiarTabla();
+    NavBar(3);
 }

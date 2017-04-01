@@ -7,6 +7,7 @@ debug('Vista de Inventario en PIA');
 debug('Usuario ID: '.$_SESSION['loginID']);
 $URL = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 debug('Visitando: '.$URL);
+$invProductos=0;
 $invCantidad=0;
 $invValor=0;
 $invPronost=0;
@@ -15,9 +16,11 @@ try{
     $result = mysqli_query($db,$sql);
     echo "<p>Inventario</p>
     <ul>
+        <li id='InvProductos'></li>
         <li id='InvCant'></li>
         <li id='IntValor'></li>
         <li id='InvPronost'></li>
+        <li id='InvRent'></li>
     </ul>
 <table>
 <tr>
@@ -32,6 +35,7 @@ try{
 </tr>";
     //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
     while($row = mysqli_fetch_array($result)) {
+        $invProductos++;
         echo "<tr>";
         echo "<td>" . $row['Bought_id'] . "</td>";
         echo "<td>" . $row['Bought_descrip'] . "</td>";
@@ -56,16 +60,20 @@ mysqli_close($con);
 ?>
 
 <script>
-    var cant = <?php echo $invCantidad; ?>;
-    var valor = <?php echo $invValor; ?>;
-    var pronostico = <?php echo $invPronost; ?>;
+    var invProductos = <?php echo $invProductos; ?>;
+    var invCant = <?php echo $invCantidad; ?>;
+    var invValor = <?php echo $invValor; ?>;
+    var invPronostico = <?php echo $invPronost; ?>;
+    var invRentabilidad = (invPronostico/invValor*100).toFixed(2)+'%';
     Number.prototype.format = function(n, x, s, c) {
         var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
             num = this.toFixed(Math.max(0, ~~n));
 
         return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
     };
-    document.getElementById('InvCant').innerHTML = 'Cantidad: ' + cant.format(0,3,',');
-    document.getElementById('IntValor').innerHTML = 'Valor: ' + valor.format(0,3,',');
-    document.getElementById('InvPronost').innerHTML = 'Pronostico: '+ pronostico.format(0,3,',');
+    document.getElementById('InvProductos').innerHTML = 'Products: '+ invProductos.format(0,3,',');
+    document.getElementById('InvCant').innerHTML = 'Quantity: ' + invCant.format(0,3,',');
+    document.getElementById('IntValor').innerHTML = 'Value: $' + invValor.format(0,3,',');
+    document.getElementById('InvPronost').innerHTML = 'profit: $'+ invPronostico.format(0,3,',');
+    document.getElementById('InvRent').innerHTML = 'Rentability: ' + invRentabilidad;
 </script>

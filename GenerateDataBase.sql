@@ -234,6 +234,24 @@ begin
     set hecho = 'F';
     end if;
 end//
+CREATE PROCEDURE inventarioPorDescripcion(IN _User_ID INT,in _descripPartial varchar(45))
+BEGIN
+	SELECT Inventory_id, Bought_descrip, Inventory_Cant
+	FROM Bought
+	INNER JOIN Inventory
+	WHERE Inventory.Users_Users_id = _User_ID
+	AND Bought.Bought_id = Inventory.Bought_Bought_id
+	AND instr(Bought.Bought_descrip, _descripPartial) > 0;
+END//
+CREATE PROCEDURE productoPorID(IN _User_ID INT,IN _ProductID INT)
+BEGIN
+	SELECT Inventory_id, Bought_descrip, Inventory_Cant
+	FROM Bought
+	INNER JOIN Inventory
+	WHERE Inventory.Users_Users_id = _User_ID
+	AND Inventory_id=_ProductID
+	AND Bought.Bought_id = Inventory.Bought_Bought_id;
+END//
 delimiter ;
 /* Users_type 0 Nuevo, 1 verificado, 2cuenta suspendida*/
 INSERT INTO Users (Users_name, Users_pass,Users_type)
