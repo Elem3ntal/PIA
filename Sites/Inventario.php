@@ -14,7 +14,10 @@ $invPronost=0;
 try{
     $sql = "CALL GetInventario(".$_SESSION['loginID'].");";
     $result = mysqli_query($db,$sql);
-    echo "<p>Inventario</p>
+    echo "
+    <div class='well well-lg'>
+
+    <h3>Inventary</h3>
     <ul>
         <li id='InvProductos'></li>
         <li id='InvCant'></li>
@@ -24,20 +27,20 @@ try{
     </ul>
 <table>
 <tr>
-<th>id</th>
-<th>Descripcion</th>
-<th>Cantidad</th>
-<th>Costo</th>
-<th>Venta</th>
-<th>Gan C/u</th>
+<th>Id</th>
+<th>Description</th>
+<th>Quantity</th>
+<th>Cost</th>
+<th>Price</th>
+<th>Profit C/u</th>
 <th>Ren %</th>
-<th>Fecha</th>
+<th>Date</th>
 </tr>";
     //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
     while($row = mysqli_fetch_array($result)) {
         $invProductos++;
         echo "<tr>";
-        echo "<td>" . $row['Bought_id'] . "</td>";
+        echo "<td>" . $row['Inventory_id'] . "</td>";
         echo "<td>" . $row['Bought_descrip'] . "</td>";
         $invCantidad += $row['Inventory_Cant'];
         echo "<td>" . number_format($row['Inventory_Cant'], 0) . "</td>";
@@ -51,7 +54,8 @@ try{
         echo "<td>" . $row['Bought_date'] . "</td>";
         echo "</tr>";
     }
-    echo "</table>";
+    echo "</table>
+    </div>";
 }
 catch (Throwable $t) {
     echo $t->getMessage();
@@ -64,7 +68,7 @@ mysqli_close($con);
     var invCant = <?php echo $invCantidad; ?>;
     var invValor = <?php echo $invValor; ?>;
     var invPronostico = <?php echo $invPronost; ?>;
-    var invRentabilidad = (invPronostico/invValor*100).toFixed(2)+'%';
+    var invRentabilidad = ((invPronostico/(invValor-invPronostico)*100)).toFixed(2)+'%';
     Number.prototype.format = function(n, x, s, c) {
         var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
             num = this.toFixed(Math.max(0, ~~n));

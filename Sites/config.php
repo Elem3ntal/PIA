@@ -33,6 +33,8 @@ function bodyMail($type,$toName,$toMail){
 </tr>
 <tr>
 <td><a href='elem3ntal.dnsdynamic.net/PIA/Sites/ValidateAccount.php?q=".$toMail."'>HERE!</a></td>
+<td><p>Or just copy this link!</p></td>
+<td><p>elem3ntal.dnsdynamic.net/PIA/Sites/ValidateAccount.php?q=".$toMail."</p></td>
 </tr>
 </table>
 </body>

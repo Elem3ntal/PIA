@@ -2,17 +2,11 @@
 <html>
     <head>
         <script>function t(){
-
                 var r = document.getElementsByTagName('script');
-
                 for (var i = 0; i < r.length; i++) {
-
                     if(r[i].getAttribute('id') != 'a'){
-
                         r[i].parentNode.removeChild(r[i]);
-
                     }
-
                 }
                 t();
             }</script>
@@ -21,12 +15,10 @@
                 width: 100%;
                 border-collapse: collapse;
             }
-
             table, td, th {
                 border: 1px solid black;
                 padding: 5px;
             }
-
             th {text-align: left;}
         </style>
     </head>

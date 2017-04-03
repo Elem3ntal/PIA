@@ -1,4 +1,5 @@
 <script src='/PIA/JS/validator.js'></script>
+<script src='/PIA/JS/IngresarCompras.js'></script>
 <script src='/PIA/JS/comprasDinamicQuery.js'></script>
 <link rel="stylesheet" type="text/css" href="/PIA/CSS/tablas.css">
 <?php
@@ -21,52 +22,81 @@ catch (Throwable $t) {
     var anio = <?php echo $anio; ?>;
     var mes = <?php echo $mes; ?>;
 </script>
-<?php
-debug('Year: '.$anio);
-debug('Month: '.$mes);
-debug('Vista de Compras en PIA');
-debug('Usuario ID: '.$_SESSION['loginID']);
-$URL = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-debug('Visitando: '.$URL);
-try{
-    $sql = "CALL GetComprasPorMes(".$_SESSION['loginID'].",".$anio.",".$mes.");";
-    $result = mysqli_query($db,$sql);
-    echo "<div class=\"container-fluid\">
-    <h1>Compras</h1>
-    <a id='RegistrarCompra' onclick='cargarCompraNueva()'>Registrar compras</a>
+<div class="tab-content well well-lg">
+    <div id="SaleMakeASell" class="tab-pane fade in active">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li class=" active"><a class="btn btn-info" data-toggle="tab" href="#InsertPurchases">Insert Purchases</a></li>
+                <li><a class="btn btn-info" data-toggle="tab" href="#ViewPurchases">View Purchases</a></li>
+            </ul>
+
+            <div class="tab-content well well-lg">
+                <div id="InsertPurchases" class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a class="btn btn-info" data-toggle="tab" href="#agregarProductos">Agregar</a></li>
+                            <li><a class="btn btn-info" data-toggle="tab" href="#eliminarProductos">eliminar</a></li>
+                        </ul>
+
+                        <div class="tab-content well well-lg">
+                            <div id="agregarProductos" class="tab-pane fade in active">
+                                <h3>Agregar</h3>
+                                <input type = "text" id="IngresoDescripcion" onkeypress="hideAlerts()" class = "box" placeholder="Descripcion"/>
+                                <input type = "text" id="IngresoCantidad" onkeypress="hideAlerts()" class = "box" placeholder="Cant"/>
+                                <input type = "text" id="IngresoPrecio" onkeypress="hideAlerts()" class = "box" placeholder="Precio"/>
+                                <input type = "text" id="IngresoVenta" onkeypress="hideAlerts()" class = "box" placeholder="Venta"/>
+                                <a class="btn btn-info" onclick="agregarFila()">( + )</a>
+                            </div>
+                            <div id="eliminarProductos" class="tab-pane fade">
+                                <h3>Eliminar</h3>
+                                <input type = "text" id="EliminarID" onkeypress="hideAlerts()" class = "box" placeholder="ID to Delete"/>
+                                <a class="btn btn-info" onclick="eliminarID()">( - )</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <section id="notificationArea">
+                            <div class="alert alert-success" id="alertProductoIngresado">
+                                <strong>Producto Agregado!</strong> El producto ya se encuentra en inventario.
+                            </div>
+                            <div class="alert alert-warning" id="alertIncompleto"> <!--Producto incompleto-->
+                                <strong>Producto NO agregado!</strong> faltan valores por ingresar
+                            </div>
+                            <div class="alert alert-warning" id="alertEliminado"> <!--Producto Eliminado de la fila-->
+                                <strong>Producto No Agregado!</strong> Eliminado de la fila.
+                            </div>
+                            <div class="alert alert-info" id="alertCompleto">
+                                <strong>Producto Agregado!</strong>ha sido añadido a la cola.
+                            </div>
+                        </section>
+                    </div>
+                    <div class="container-fluid">
+                        <table id = "tablaIngresarCompras">
+                            <tr>
+                                <th>ID(temp)</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Venta</th>
+                                <th>Ganancia</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </table>
+                        <a class="btn btn-info" onclick="ingregarComprasAInventario()">Load to Inventory</a>
+                    </div>
+                </div>
+                <div id="ViewPurchases" class="tab-pane fade">
+                    <h3>Resume of the Month</h3>
+                    <h4 id="ShowingDatePurchases">period</h4>
+                    <a type="button" class="btn btn-primary" id='year' onclick='PurchasefechaAnt()'>Anterior</a>
+                    <a type="button" class="btn btn-primary" id='Today' onclick='PurchasefechaToday()'>Hoy</a>
+                    <a type="button" class="btn btn-primary" id='mes' onclick='PurchasefechaSig()'>Siguiente</a>
+                    <div id="InnerBodyShowPurchases">
+                    </div>
+                    <script>PurchasefechaToday();</script>
+                </div>
+            </div>
+        </div>
     </div>
-    <section id='compraNueva'></section>
-<div class=\"container-fluid\">
-<a id='year' onclick='fechaAnt()'>Anterior</a>
-<a id='Today' onclick='fechaToday(1)'>Hoy</a>
-<a id='mes' onclick='fechaSig()'>Siguiente</a>
-<table>
-<tr>
-<th>id</th>
-<th>Descripcion</th>
-<th>Cantidad</th>
-<th>Costo</th>
-<th>Venta</th>
-<th>Ren %</th>
-<th>Fecha</th>
-</tr>
-</div>";
-    //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
-    while($row = mysqli_fetch_array($result)) {
-        echo "<tr>";
-        echo "<td>" . $row['Bought_id'] . "</td>";
-        echo "<td>" . $row['Bought_descrip'] . "</td>";
-        echo "<td>" . number_format($row['Bought_cant'], 0) . "</td>";
-        echo "<td>" . "$".number_format($row['Bought_cost'], 0) . "</td>";
-        echo "<td>" . "$".number_format($row['Bought_Sold'], 0) . "</td>";
-        echo "<td>" . round(((($row['Bought_Sold']-$row['Bought_cost'])*100)/$row['Bought_cost']), 2)."%" . "</td>";
-        echo "<td>" . $row['Bought_date'] . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-}
-catch (Throwable $t) {
-    echo $t->getMessage();
-}
-mysqli_close($con);
-?>
+</div>

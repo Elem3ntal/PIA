@@ -35,13 +35,13 @@ if($variable[0]=="exit"){
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a  onclick="NavBar(1)">Inventario</a></li>
-                    <li><a  onclick="NavBar(2)">Ventas</a></li>
-                    <li><a  onclick="NavBar(3)">Compras</a></li>
-                    <li><a  onclick="NavBar(4)">Resumen</a></li>
+                    <li><a  onclick="NavBar(1)">Inventary</a></li>
+                    <li><a  onclick="NavBar(2)">Sales</a></li>
+                    <li><a  onclick="NavBar(3)">Purchases</a></li>
+                    <li><a  onclick="NavBar(4)">Resume</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="alert('The translate service in\'t avalible');"><span class="glyphicon glyphicon-flag"></span>English</a></li>
+                    <li><a onclick="alert('The translate service isn\'t avalible.\nEl Servicio de traducción no esta disponible.');"><span class="glyphicon glyphicon-flag"></span>Español</a></li>
                 </ul>
             </div>
         </div>
@@ -54,8 +54,10 @@ if($variable[0]=="exit"){
 </section>
 <br><br>
 <section class="navbar-fixed-bottom" id="footerInside">
-    <a onclick="logout();">logout</a>
-    <p>Sitio en Construcción</p>
+    <div class="alert alert-info">
+        <strong>Remember!</strong> PIA is still under development, the estability of the site is compromised.
+    </div>
+    <a id="logout" type="button" class="btn btn-primary" onclick="logout();">logout</a><br>
     <p>Creditos: &copy;Elem3ntal Development</p>
     <ul>
         <li id="Elem3ntalDmnt"><a href="/">WebSite</a></li>

@@ -8,7 +8,7 @@ if($variable[0]!=""){
    $user=mysqli_real_escape_string($db,$variable[0]);
    $pass=mysqli_real_escape_string($db,utf8_decode(md5(($variable[1]))));
    //
-   $sql = "SELECT Users_id FROM PIA.Users WHERE Users_name = '$user' and Users_pass = '$pass'";
+   $sql = "CALL Login('".$user."','".$pass."');";
    $result = mysqli_query($db,$sql);
    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
    $active = $row['Users_id'];
@@ -27,6 +27,7 @@ else{
 }
 ?>
 <script>
+   loadjscssfile("/CSS/inside.css","css");
    var enviar = ""+ <?php echo $inside; ?>;
    function mandarAInside(enviar){
       if(parseInt(enviar)>0){
@@ -53,15 +54,23 @@ else{
       }
    }
 </script>
+<script>loadjscssfile("CSS/login.css","css");</script>
+<div id="InfoPIA">
+   <h3>Welcome to P.I.A.</h3>
+   <h4>Products and Inventory Administered</h4>
+   <p>PIA is a little web system to help to the micro and little's businessman to keep and eye in their business's numbers.</p>
+   <p>We provide a register of your inventory, register of purchases/sales, calculating the profitability and utility of all time, every month and in cycles of 3, 6 and 12 months</p>
+</div>
 <div id="main2">
-   <div style = "width:300px; border: solid 1px #333333; " align = "left">
-      <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+   <div id="login" align = "center">
+      <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login In</b></div>
       <form action = "" method = "post">
-         <label>UserName  :</label><input type = "text" id="username" class = "box"/><br /><br />
-         <label>Password  :</label><input type = "password" id="password" class = "box" onkeyup='enviarUsuario(event);'/><br/><br />
-         <a onclick="login();">Submit</a>
-         <br/>
-         <a onclick="ChangeToRegistrer();">Registrer FREE!</a>
+         <input type = "text" id="username" class = "box" placeholder="Username"><br/>
+         <input type = "password" id="password" class = "box" onkeyup='enviarUsuario(event);' placeholder="Password"/>
+         <br/><br/>
+         <a type="button" class="btn btn-success" onclick="login();">log in</a>
+         <br/><br/>
+         <a type="button" class="btn btn-info" onclick="ChangeToRegistrer();">Sign Up</a>
       </form>
       <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
    </div>

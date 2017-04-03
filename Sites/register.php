@@ -2,6 +2,7 @@
 include("config.php");
 ?>
 <script>
+   loadjscssfile("CSS/login.css","css");
    function showResult(){
       console.log('console text');
       var inputElem = document.getElementById("username");
@@ -12,6 +13,10 @@ include("config.php");
             inputElem.style.backgroundColor = "";
             return;
          }
+      }
+      if(stra.length < 6){
+            inputElem.style.backgroundColor = "yellow";
+            return;
       }
       if (window.XMLHttpRequest) {
          // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -41,7 +46,7 @@ include("config.php");
       var pass2 = document.getElementById("password2").value;
       var user = document.getElementById("username").value;
       var email = document.getElementById("email").value;
-      if(user.length > 6 && pass1==pass2){
+      if(user.length > 5 && pass1==pass2){
          if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp=new XMLHttpRequest();
@@ -52,7 +57,7 @@ include("config.php");
             if (this.readyState==4 && this.status==200) {
                retorno = this.responseText;
                if(retorno==1){
-                  alert('Usuario Registrado!');
+                  alert('An email has been recently sended, please confirm your email direccion by open the link inside, best regards! P.I.A.');
                   $("#main").load("/PIA/Sites/login.php");
                }
                else{
@@ -97,7 +102,7 @@ include("config.php");
       var stra = document.getElementById("email").value;
       if(stra.length>10){
          if(stra.indexOf('@')==stra.lastIndexOf('@')){
-            if(stra.lastIndexOf('.')>stra.indexOf('@')){
+            if(stra.lastIndexOf('.')>stra.indexOf('@') && stra.indexOf('@')>0){
                inputElem.style.backgroundColor = "green";
                return 1;
             }
@@ -150,8 +155,28 @@ include("config.php");
       xmlhttp.open("GET","/PIA/Sites/checkEmail.php?q="+stra,true);
       xmlhttp.send();
    }
+   function userLength(){
+      var largoUsuario = document.getElementById("username").value.length;
+      if(largoUsuario<6){
+         document.getElementById("textDanger").innerHTML="Minimum 6 characters for username";
+         $(".alert").hide().show('medium');
+      }
+   }
 </script>
-<p>UserName:</p><input type = "text" id="username" class = "box" onkeyup = "showResult();"/><br/>
-<p>Password:</p><input type = "password" id="password" class = "box" /><br/>
-<p>Reinsert Password:</p><input type = "password" id="password2" class = "box" onkeyup = "checkPassword();"/><br/>
-<p>Email: </p><input type = "text" id="email" class = "box" onkeyup = "checkEmail();return searchKeyPress(event);"/>
+<div id="login" align = "center">
+   <h4>P.I.A.</h4>
+   <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Sign Up</b></div>
+   <input type = "text" id="username" class = "box" onkeyup = "showResult();" onblur="userLength();"  placeholder="Username"/><br/>
+   <input type = "password" id="password" class = "box"  placeholder="Password"/><br/>
+   <input type = "password" id="password2" class = "box" onkeyup = "checkPassword();" placeholder="Reinsert Password"/><br/>
+   <input type = "text" id="email" class = "box" onkeyup = "checkEmail();return searchKeyPress(event);"  placeholder="Email@host.com"/>
+   <br>
+   <div class="alert alert-danger alert-dismissible" id="signUpNoti">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong><p id="textDanger">Message has been sent!</p>
+   </div>
+
+   <script>$("#signUpNoti").hide();</script>
+   <br>
+   <a type="button" class="btn btn-info" onclick="registrarUsuarioNuevo();">Sign Up</a>
+</div>
