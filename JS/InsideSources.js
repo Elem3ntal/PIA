@@ -16,4 +16,5 @@ function loadjscssfile(filename, filetype) {
     }
 }
 //SOURCE FILES
-loadjscssfile("/PIA/CSS/body.css","css");
+loadjscssfile("/PIA/CSS/inside.css","css");
+loadjscssfile("JS/InsideMenu.js","js");
