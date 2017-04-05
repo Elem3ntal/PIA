@@ -1,14 +1,16 @@
-USE PIA;
 delimiter ;
 /* Users_type 0 Nuevo, 1 verificado, 2cuenta suspendida*/
 INSERT INTO Users (Users_name, Users_pass,Users_type)
-VALUES ('sebapini', '9e7520594c505e4cbb95f0ca8aa30063',1),
+VALUES ('sebapini', '9e7520594c505e4cbb95f0ca8aa30063',0),
 ('javier', '3c9c03d6008a5adf42c2a55dd4a1a9f2',1),
-('jonas', '9c5ddd54107734f7d18335a5245c286b',1);
+('jonas', '9c5ddd54107734f7d18335a5245c286b',0),
+('gato', '70b783251225354e883a5bef3c011843',0),
+('perro', 'd44b121fc3524fe5cdc4f3feb31ceb78',0),
+('user', 'ee11cbb19052e40b07aac0ca060c23ee',0);
 
 INSERT INTO ExtraData(ExtraData_webSite, ExtraData_email,ExtraData_RecomenderPrice,Users_Users_id)
 values('www.facebook.com/entregaencleta','javier08@hotmail.com',1.8,2);
-/*
+
 INSERT INTO Bought (Bought_descrip, Bought_cost, Bought_cant, Bought_Sold, Bought_date, Users_Users_id)
 VALUES ('Lentes de Sol', 10000, 50, 20000, '2017-02-01', 1),
 ('Lentes de Sol', 11000, 45, 20000, '2017-02-01', 2),
@@ -44,4 +46,3 @@ VALUES (1, 1, 20000,1,'2017-03-02',1),
 (4, 1, 20000,1,'2017-03-02',4),
 (5, 1, 20000,1,'2017-03-02',5),
 (6, 1, 20000,1,'2017-03-02',6);
-*/
