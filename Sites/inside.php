@@ -58,7 +58,7 @@ if($variable[0]=="exit"){
         <strong>Remember!</strong> PIA is still under development, the estability of the site is compromised.
     </div>
     <a id="logout" type="button" class="btn btn-primary" onclick="logout();">logout</a><br>
-    <p>Creditos: &copy;Elem3ntal Development</p>
+    <p>Copyright: &copy;Elem3ntal Development</p>
     <ul>
         <li id="Elem3ntalDmnt"><a href="/">WebSite</a></li>
         <li id="Elem3ntalDmnt"><a href="https://www.facebook.com/Elem3ntalDmnt" target="_blank" role="button">FanPage</a></li>
