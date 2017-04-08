@@ -7,6 +7,9 @@ include("config.php");
 session_start();
 $anio = date("Y");
 $mes = date("m");
+$idUser = getIdUser();
+$ip = getIPuser();
+$sitio = "Purchases";
 try{
     $variable = explode(",", $_GET["q"]);
     if($variable[0]!=""){
@@ -18,7 +21,12 @@ catch (Throwable $t) {
     echo $t->getMessage();
 }
 ?>
+<script src='/PIA/JS/UsageStatistics.js'></script>
 <script>
+    var idUser = "" + <?php echo $idUser; ?>;
+    var ip = " + <?php echo $ip; ?>";
+    var sitio = " + <?php echo $sitio; ?>";
+    registerVisit(idUser,ip,sitio);
     var anio = <?php echo $anio; ?>;
     var mes = <?php echo $mes; ?>;
 </script>

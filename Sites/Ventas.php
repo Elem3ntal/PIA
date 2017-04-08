@@ -7,13 +7,17 @@ include("config.php");
 session_start();
 $anio = date("Y");
 $mes = date("m");
-debug('Vista de Ventas en PIA');
-debug('Usuario ID: '.$_SESSION['loginID']);
-$URL = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-debug('Visitando: '.$URL);
-mysqli_close($con);
+//$URL = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+$idUser = getIdUser();
+$ip = getIPuser();
+$sitio = "Sales";
 ?>
+<script src='/PIA/JS/UsageStatistics.js'></script>
 <script>
+    var idUser = "" + <?php echo $idUser; ?>;
+    var ip = " + <?php echo $ip; ?>";
+    var sitio = " + <?php echo $sitio; ?>";
+    registerVisit(idUser,ip,sitio);
     var anio = <?php echo $anio; ?>;
     var mes = <?php echo $mes; ?>;
 </script>

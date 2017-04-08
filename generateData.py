@@ -39,7 +39,7 @@ def fechaEstimate(cant):
 ############################global variable####################################################
 month = int(datetime.datetime.now().strftime("%m"))
 year = int(datetime.datetime.now().strftime("%Y"))
-products=["telefono","computador","notebook","pelota","raqueta","mesa","silla","casa","bicicleta","teclado","notebook","peineta","dataShow","telon","puerta","pendrive","torta","pan","bebida","bidon"]
+products=["Telefono","Computador","Notebook","Pelota","Raqueta","Mesa","Silla","Casa","Bicicleta","Teclado","Notebook","Peineta","DataShow","Telon","Puerta","Pendrive","Torta","Pan","Bebida","Bidon","Tazon","Impresora","Tablet","Celular","Iphone","Ipad","Windows Xp","Windows 7","Windows 10","Pastillas","Remedio","PLumon","Gato","perro","Codigo","Diploma","Interruptor","manilla","Ampolleta LED","Ampolleta Convencional","Hoja Carta","Hoja Oficio","Ventilador","Smart TV","Ultrabook","Netbook"]
 commands=[[],[],[]]
 #############################################program###########################################
 BoughtID=1

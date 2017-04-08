@@ -85,10 +85,11 @@ CREATE TABLE IF NOT EXISTS `PIA`.`Clients` (
   `Clients_id` INT NOT NULL AUTO_INCREMENT,
   `Clients_F_Name` VARCHAR(45) NULL,
   `Clients_L_Name` VARCHAR(45) NULL,
-  `Clients_Phone` INT NULL,
+  `Clients_Contact` INT NULL,
   PRIMARY KEY (`Clients_id`))
 ENGINE = InnoDB;
-
+INSERT INTO Clients (Clients_F_Name, Clients_L_Name, Clients_Contact)
+VALUES ('Private','Sale','0');
 
 -- -----------------------------------------------------
 -- Table `PIA`.`Sold`
@@ -158,7 +159,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PIA`.`UsageStatistics` ;
 
 CREATE TABLE IF NOT EXISTS `PIA`.`UsageStatistics` (
-  `UsageStatistics_id` INT NOT NULL,
+  `UsageStatistics_id` INT NOT NULL AUTO_INCREMENT,
   `UsageStatistics_User` INT NULL,
   `UsageStatistics_IP` VARCHAR(45) NULL,
   `UsageStatistics_Site` VARCHAR(45) NULL,
@@ -183,7 +184,8 @@ DROP procedure IF EXISTS `PIA`.`Login`;
 -- -----------------------------------------------------
 --  routine1
 -- -----------------------------------------------------
-delimiter //
+
+DELIMITER //
 #################################################################################################
 #################################PROCEDIMIENTOS DE USUARIO
 CREATE PROCEDURE Login(in _user varchar(45), in _pass varchar(45))
@@ -364,6 +366,7 @@ CREATE FUNCTION ventaCliente() RETURNS INT UNSIGNED
 BEGIN
   RETURN 1;
 END$$
+
 #################################################################################################
 #################################FUNCIONES DE INVENTARIO
 
@@ -380,4 +383,12 @@ BEGIN
     RETURN @_IDclient;
 END $$
 
+#################################################################################################
+#################################FUNCIONES DE USO ESTADISTICO
+CREATE FUNCTION LogVisit(_id INT, _IP VARCHAR(45), _site VARCHAR(45)) RETURNS INT UNSIGNED
+BEGIN
+	INSERT INTO PIA.UsageStatistics(UsageStatistics_User, UsageStatistics_IP, UsageStatistics_Site, UsageStatistics_DateTime)
+    VALUES(_id, _IP, _site, NOW());
+	RETURN 1;
+END $$
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#

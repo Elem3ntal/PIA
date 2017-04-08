@@ -1,10 +1,15 @@
 <script src='/PIA/JS/validator.js'></script>
 <link rel="stylesheet" type="text/css" href="/PIA/CSS/tablas.css">
+
+
 <?php
 include("config.php");
 session_start();
 $anio = date("Y");
 $mes = date("m");
+$idUser = getIdUser();
+$ip = getIPuser();
+$sitio = "Resume";
 function dateMonthBefore(){
     global $mes;
     global $anio;
@@ -96,7 +101,12 @@ catch (Throwable $t) {
 }
 mysqli_close($db);
 ?>
+<script src='/PIA/JS/UsageStatistics.js'></script>
 <script>
+    var idUser = "" + <?php echo $idUser; ?>;
+    var ip = " + <?php echo $ip; ?>";
+    var sitio = " + <?php echo $sitio; ?>";
+    registerVisit(idUser,ip,sitio);
     Number.prototype.format = function(n, x, s, c) {
         var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
             num = this.toFixed(Math.max(0, ~~n));

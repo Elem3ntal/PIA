@@ -16,6 +16,21 @@ function debug(string $mensaje){
         echo "<p id='debugMessage'>" .$mensaje ."</p>";
     }
 }
+//Usage Statistics
+function getIdUser(){
+	session_start();
+	return $_SESSION['loginID'];
+}
+function  getIPuser(){
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return $ip;
+}
 //mail config
 function bodyMail($type,$toName,$toMail){
     if($type==0){

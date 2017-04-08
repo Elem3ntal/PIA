@@ -1,7 +1,17 @@
 <?php
-
+include("config.php");
+session_start();
+$idUser = getIdUser();
+$ip = getIPuser();
+$sitio = "Home";
 ?>
-<script src='/PIA/JS/validator.js'></script>
+<script src='/PIA/JS/UsageStatistics.js'></script>
+<script>
+    var idUser = "" + <?php echo $idUser; ?>;
+    var ip = " + <?php echo $ip; ?>";
+    var sitio = " + <?php echo $sitio; ?>";
+    registerVisit(idUser,ip,sitio);
+</script>
 <h3>Welcome to P.I.A.</h3>
 <h4>Products and Inventory Administered</h4>
 <p>PIA is a little web system to help to the micro and little's businessman to keep and eye in their business's numbers.</p>
