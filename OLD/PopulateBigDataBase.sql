@@ -1,16 +1,5 @@
 USE PIA;
 delimiter ;
-/* Users_type 0 Nuevo, 1 verificado, 2cuenta suspendida*/
-INSERT INTO Users (Users_name, Users_pass,Users_type)
-VALUES ('sebapini', '9e7520594c505e4cbb95f0ca8aa30063',1),
-('javier', '3c9c03d6008a5adf42c2a55dd4a1a9f2',1),
-('jonas', '9c5ddd54107734f7d18335a5245c286b',1),
-('juan', 'a94652aa97c7211ba8954dd15a3cf838',1);
-
-INSERT INTO ExtraData(ExtraData_webSite, ExtraData_email,ExtraData_RecomenderPrice,Users_Users_id)
-values('www.facebook.com/entregaencleta','javier08@hotmail.com',1.8,2),
-('www.facebook.com/donJuan','javier08@hotmail.com',2,4);
-
 INSERT INTO Bought (Bought_descrip, Bought_Cost, Bought_cant, Bought_Sold, Bought_date, Users_Users_id)
 VALUES ('dataShow',5000,74,11000,'2017-4-5',1),
 ('bicicleta',6000,65,17000,'2017-4-5',1),

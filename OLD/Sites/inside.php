@@ -53,13 +53,12 @@ if($variable[0]=="exit"){
     </section>
 </section>
 <br><br>
-<div class="alert alert-info alert-dismissable fade in navbar-fixed-bottom footerAlert">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Remember!</strong> PIA is still under development, the estability of the site is compromised.
-</div>
 <section class="navbar-fixed-bottom" id="footerInside">
+    <div class="alert alert-info">
+        <strong>Remember!</strong> PIA is still under development, the estability of the site is compromised.
+    </div>
     <a id="logout" type="button" class="btn btn-primary" onclick="logout();">logout</a><br>
-    <p>Copyright: &copy;Elem3ntal Development</p>
+    <p>Creditos: &copy;Elem3ntal Development</p>
     <ul>
         <li id="Elem3ntalDmnt"><a href="/">WebSite</a></li>
         <li id="Elem3ntalDmnt"><a href="https://www.facebook.com/Elem3ntalDmnt" target="_blank" role="button">FanPage</a></li>
