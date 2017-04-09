@@ -369,7 +369,21 @@ END$$
 
 #################################################################################################
 #################################FUNCIONES DE INVENTARIO
-
+#Con el Id del inventario, busca y cambia el producto en la tabla de compras
+CREATE FUNCTION CambiarDescripcionPrecio(_IDInvProd INT, _descripNueva VARCHAR(45), _priceNew int) RETURNS INT UNSIGNED
+BEGIN
+	SELECT Inventory.Bought_Bought_id, Inventory_cant, Inventory.Users_Users_id INTO @BoughtID_OLD,@canActual, @usuario 
+    FROM Inventory WHERE Inventory_id = _IDinvProd;
+    UPDATE Bought SET Bought_cant = Bought_cant - @canActual WHERE Bought_id = @BoughtID_OLD;
+    SELECT Bought_cost, Bought_date INTO @Cost, @fecha
+    FROM Bought WHERE Bought_id = @BoughtID_OLD;
+    INSERT PIA.Bought(Bought_descrip, Bought_Cost, Bought_cant, Bought_Sold, Bought_date, Users_Users_id)
+    VALUES (_descripNueva, @Cost, @canActual,_priceNew,@fecha,@usuario);
+    SELECT Bought_id INTO @_IDNueva FROM PIA.Bought ORDER BY Bought_id DESC LIMIT 1;
+    UPDATE Inventory SET Bought_Bought_id = @_IDNueva
+    WHERE Inventory_id = _IDInvProd;
+	RETURN 1;
+END$$
 #################################################################################################
 #################################FUNCIONES DE RESUMEN
 
