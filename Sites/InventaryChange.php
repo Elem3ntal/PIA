@@ -17,25 +17,23 @@ try {
 catch(Throwable $t) {
     echo $t->getMessage();
 }
-?>
-<input type="text" id="InventoryChangeID" value="" placeholder="ID" readonly>
-<input type="text" id="InventoryChangeDescript" value="" placeholder="Descript">
-<input type="text" id="InventoryChangePrice" value="" placeholder="Price">
-<input type="text" id="InventoryChangeDate" value="" placeholder="Date" readonly>
-<a type="button" class="btn btn-info" onclick="actualizarProducto();">Update</a>
-
-<br>
-<a type="button" class="btn btn-info" data-toggle="collapse" data-target="#filtersChangeInvent" onclick="ICcleanFilters();">Filter List</a>
-<div id="filtersChangeInvent" class="collapse row" style="width:90%;height:500px">
-    <input type="text" id="ICFid" value="" placeholder="ID" onkeyup="ICfilterList()">
-    <input type="text" id="ICFdescript" value="" placeholder="Descript" onkeyup="ICfilterList()">
-</div>
-<?php
 if($variable[0]=="0"){
     try{
         $sql = "CALL GetInventario(".$_SESSION['loginID'].");";
         $result = mysqli_query($db,$sql);
         echo "
+<input type='text' id='InventoryChangeID' value='' placeholder='ID' readonly>
+<input type='text' id='InventoryChangeDescript' value='' placeholder='Descript'>
+<input type='text' id='InventoryChangePrice' value='' placeholder='Price'>
+<input type='text' id='InventoryChangeDate' value='' placeholder='Date' readonly>
+<a type='button' class='btn btn-info' onclick='actualizarProducto();'>Update</a>
+
+<br>
+<a type='button' class='btn btn-info' data-toggle='collapse' data-target='#filtersChangeInvent' onclick='ICcleanFilters();'>Filter List</a>
+<div id='filtersChangeInvent' class='collapse row' style='width:90%;height:500px'>
+    <input type='text' id='ICFid' value='' placeholder='ID' onkeyup='ICfilterList()'>
+    <input type='text' id='ICFdescript' value='' placeholder='Descript' onkeyup='ICfilterList()'>
+</div>
     <h3>Modificate Inventary</h3>
 <table id='ICTable'>
 <tr>
@@ -63,6 +61,11 @@ if($variable[0]=="0"){
         echo $t->getMessage();
     }
     mysqli_close($con);
+}
+else if($variable[0]=="2"){
+?>
+<h4>Export service isn't available</h4>
+<?php
 }
 ?>
 <script>

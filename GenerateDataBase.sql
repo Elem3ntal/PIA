@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `PIA`.`Clients` (
   `Clients_id` INT NOT NULL AUTO_INCREMENT,
   `Clients_F_Name` VARCHAR(45) NULL,
   `Clients_L_Name` VARCHAR(45) NULL,
-  `Clients_Contact` INT NULL,
+  `Clients_Contact` VARCHAR(45) NULL,
   PRIMARY KEY (`Clients_id`))
 ENGINE = InnoDB;
 INSERT INTO Clients (Clients_F_Name, Clients_L_Name, Clients_Contact)
@@ -212,7 +212,8 @@ BEGIN
   SELECT Users_name, ExtraData_email, ExtraData_RecomenderPrice
     FROM Users
     INNER JOIN ExtraData
-    WHERE Users_Users_id = Users_id;
+    WHERE ExtraData.Users_Users_id = Users.Users_id
+	AND Users.Users_id=_ID;
 END//
 
 CREATE PROCEDURE ExtraDataSet(IN _ID INT, IN _webSite VARCHAR(45), IN _Recomender FLOAT)
@@ -229,7 +230,8 @@ BEGIN
   INNER JOIN Inventory
   ON Bought.Bought_id = Bought_Bought_id
   AND Bought.Users_Users_id=id
-  AND Inventory_Cant>0;
+  AND Inventory_Cant>0
+  ORDER BY Inventory_id ASC;
 END//
 #################################################################################################
 #################################PROCEDIMIENTOS DE VENTAS
@@ -239,7 +241,8 @@ BEGIN
   FROM Bought
   INNER JOIN Sold
   ON Bought.Bought_id = Bought_Bought_id
-  WHERE Sold.Users_Users_id=id;
+  WHERE Sold.Users_Users_id=id
+  ORDER BY Sold_id ASC;
 END//
 
 CREATE PROCEDURE GetVentasPorMes (IN id INT,IN anio INT,IN mes INT)
@@ -248,7 +251,8 @@ BEGIN
   FROM Bought
   INNER JOIN Sold
   ON Bought.Bought_id = Bought_Bought_id
-  WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id;
+  WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id
+  ORDER BY Sold_id ASC;
 END//
 
 ##Descuenta del inventario siempre y cuando la cantidad sea positiva, y luego lo registra en venta
@@ -271,14 +275,16 @@ CREATE PROCEDURE GetCompras (IN id INT)
 BEGIN
   SELECT Bought_id, Bought_descrip, Bought_cost, Bought_Sold, Bought_cant, Bought_date
   FROM Bought
-  WHERE Users_Users_id=id;
+  WHERE Users_Users_id=id
+  ORDER BY Bought_id ASC;
 END//
 
 CREATE PROCEDURE GetComprasPorMes(IN id INT,IN anio INT,IN mes INT)
 BEGIN
   SELECT Bought_id, Bought_descrip, Bought_cost, Bought_Sold, Bought_cant, Bought_date
   FROM Bought
-  WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id;
+  WHERE YEAR(Bought_date) = anio AND MONTH(Bought_date) = mes AND Users_Users_id = id
+  ORDER BY Bought_id ASC;
 END//
 
 CREATE PROCEDURE inventarioPorDescripcion(IN _User_ID INT,in _descripPartial varchar(45))
@@ -288,7 +294,8 @@ BEGIN
   INNER JOIN Inventory
   WHERE Inventory.Users_Users_id = _User_ID
   AND Bought.Bought_id = Inventory.Bought_Bought_id
-  AND instr(Bought.Bought_descrip, _descripPartial) > 0;
+  AND instr(Bought.Bought_descrip, _descripPartial) > 0
+  ORDER BY Inventory_id ASC;
 END//
 CREATE PROCEDURE productoPorID(IN _User_ID INT,IN _ProductID INT)
 BEGIN
@@ -297,7 +304,8 @@ BEGIN
   INNER JOIN Inventory
   WHERE Inventory.Users_Users_id = _User_ID
   AND Inventory_id=_ProductID
-  AND Bought.Bought_id = Inventory.Bought_Bought_id;
+  AND Bought.Bought_id = Inventory.Bought_Bought_id
+  ORDER BY Inventory_id ASC;
 END//
 #################################################################################################
 #################################PROCEDIMIENTOS CON CLIENTES

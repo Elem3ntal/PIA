@@ -33,7 +33,7 @@ $sitio = "Invetary";
     </div>
 
     <div class="tab-content well well-lg">
-        <div id="seeInventary" class="tab-pane fade in active">
+        <div id="seeInventary" class="tab-pane in active">
             <div id="InventarySee">
                 <script>menuInventary(1);</script>
             </div>

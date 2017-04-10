@@ -66,6 +66,7 @@ try {
         $sql = "SELECT ClienteRegistrar('".$clienteNombre."','".$clienteApellido."','".$clienteTelefono."');";
         $result = mysqli_query($db,$sql);
         $clientID = mysqli_fetch_array($result);
+        echo $clientID[0].'\n';
         $sql = "SELECT venta(".$user.",".$clientID[0].",".$IDproducto.",".$CantVenta.");";
         $result = mysqli_query($db,$sql);
         $Resultado = mysqli_fetch_array($result);

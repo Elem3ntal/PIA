@@ -131,7 +131,6 @@ function makeASell(){
         debugOutput("Anonimate Sale");
         //FROM HERE!
         var link = "/PIA/Sites/VentasIngresarMetodos.php?q=3,"+productInSale[0]+","+productInSale[1];
-        alert(link);
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -141,7 +140,7 @@ function makeASell(){
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
+                alert("Sale Made");
             }
         };
         xmlhttp.open("GET",link,true);
@@ -165,7 +164,7 @@ function makeASell(){
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
+                alert("Sale Made");
             }
         };
         xmlhttp.open("GET",link,true);
