@@ -32,16 +32,20 @@ try{
 <th>Units</th>
 <th>Total</th>
 <th>Date</th>
+<th>Client</th>
+<th>Contact</th>
 </tr>
 </div>";
     //Bought_id, Bought_descrip, Inventory_Cant, Bought_cost, Bought_Sold, Bought_date
     while($row = mysqli_fetch_array($result)) {
         echo "<tr>";
         echo "<td>" . $row['Bought_descrip'] . "</td>";
-        echo "<td>" . $row['Sold_Price'] . "</td>";
+        echo "<td>" .'$'.number_format($row['Sold_Price'], 0) . "</td>";
         echo "<td>" . number_format($row['Sold_Units'], 0) . "</td>";
-        echo "<td>" . number_format(($row['Sold_Units']*$row['Sold_Price']), 0) . "</td>";
+        echo "<td>" . '$'.number_format(($row['Sold_Units']*$row['Sold_Price']), 0) . "</td>";
         echo "<td>" . $row['Sold_Date'] . "</td>";
+        echo "<td>" . $row['Clients_F_Name'] .' '. $row['Clients_L_Name'] . "</td>";
+        echo "<td>" . $row['Clients_Contact'] . "</td>";
         echo "</tr>";
     }
     echo "</table>";

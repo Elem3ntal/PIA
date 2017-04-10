@@ -194,6 +194,7 @@ BEGIN
   FROM Users
   WHERE Users_name=_user AND Users_pass=_pass and Users_type=1;
 END//
+
 CREATE PROCEDURE checkUser(IN _user varchar(45))
 BEGIN
   SELECT count(*)
@@ -241,16 +242,20 @@ BEGIN
   FROM Bought
   INNER JOIN Sold
   ON Bought.Bought_id = Bought_Bought_id
+  INNER JOIN Clients
+  ON Sold.Clients_Clients_id = Clients.Clients_id
   WHERE Sold.Users_Users_id=id
   ORDER BY Sold_id ASC;
 END//
 
 CREATE PROCEDURE GetVentasPorMes (IN id INT,IN anio INT,IN mes INT)
 BEGIN
-  SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date
+  SELECT Bought_descrip, Sold_Price, Sold_Units, Sold_Date, Clients_F_Name, Clients_L_Name, Clients_Contact
   FROM Bought
   INNER JOIN Sold
   ON Bought.Bought_id = Bought_Bought_id
+  INNER JOIN Clients
+  ON Clients_Clients_id = Clients_id
   WHERE YEAR(Sold_Date) = anio AND MONTH(Sold_Date) = mes AND Sold.Users_Users_id=id
   ORDER BY Sold_id ASC;
 END//

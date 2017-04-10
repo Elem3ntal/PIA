@@ -141,6 +141,7 @@ function makeASell(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 alert("Sale Made");
+                NavBar(2);
             }
         };
         xmlhttp.open("GET",link,true);
@@ -165,6 +166,7 @@ function makeASell(){
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 alert("Sale Made");
+                NavBar(2);
             }
         };
         xmlhttp.open("GET",link,true);
