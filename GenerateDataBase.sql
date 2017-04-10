@@ -205,22 +205,16 @@ CREATE PROCEDURE checkEmail(IN _email varchar(45))
 BEGIN
   SELECT count(*)
   FROM PIA.ExtraData
-    WHERE ExtraData_email = _email;
+  WHERE ExtraData_email = _email;
 END//
 #retorna el nombre de usuario, corrreo y Recomendador de precios en base al ID
 CREATE PROCEDURE GetUserNameEmail(IN _ID INT)
 BEGIN
   SELECT Users_name, ExtraData_email, ExtraData_RecomenderPrice
-    FROM Users
-    INNER JOIN ExtraData
-    WHERE ExtraData.Users_Users_id = Users.Users_id
-	AND Users.Users_id=_ID;
-END//
-
-CREATE PROCEDURE ExtraDataSet(IN _ID INT, IN _webSite VARCHAR(45), IN _Recomender FLOAT)
-BEGIN
-  UPDATE ExtraData SET ExtraData_webSite = _webSite, ExtraData_RecomenderPrice=_Recomender
-    WHERE Users_Users_id = _ID;
+  FROM Users
+  INNER JOIN ExtraData
+  WHERE ExtraData.Users_Users_id = Users.Users_id
+  AND Users.Users_id=_ID;
 END//
 #################################################################################################
 #################################PROCEDIMIENTOS DE INVENTARIO
@@ -328,22 +322,31 @@ CREATE FUNCTION CrearUsuario (_user VARCHAR(45), _pass VARCHAR(45), _email varch
 BEGIN
   INSERT INTO PIA.Users (Users_name, Users_pass, Users_type) VALUES (_user, _pass, 0);
   SELECT Users_id into @IDUSER FROM PIA.Users where Users_name=_user;
-  insert into PIA.ExtraData(ExtraData_webSite, ExtraData_email, ExtraData_RecomenderPrice, Users_Users_id)
-  values ('',_email,0,@IDUSER);
+  INSERT INTO PIA.ExtraData(ExtraData_webSite, ExtraData_email, ExtraData_RecomenderPrice, Users_Users_id)
+  VALUES ('',_email,0,@IDUSER);
   RETURN 1;
 END$$
 
 CREATE FUNCTION VerificarUsuario(_user varchar(45)) RETURNS INT UNSIGNED
 BEGIN
   SELECT COUNT(*) into @salida from PIA.Users WHERE Users_name = _user;
-    return @salida;
+  RETURN @salida;
 end$$
 
 CREATE FUNCTION VerificarEmail(_email varchar(45)) RETURNS INT UNSIGNED
 BEGIN
   SELECT Users_Users_id into @UserID From PIA.ExtraData WHERE ExtraData_email = _email;
-    UPDATE PIA.Users SET Users_type = 1 Where Users_id = @UserID;
-    RETURN 1;
+  UPDATE PIA.Users SET Users_type = 1 Where Users_id = @UserID;
+  RETURN 1;
+END$$
+
+CREATE FUNCTION ExtraDataSet(_ID INT, _name VARCHAR(45), _email VARCHAR(45), _Recomender FLOAT) RETURNS INT
+BEGIN
+  UPDATE ExtraData SET ExtraData_email = _email, ExtraData_RecomenderPrice=_Recomender
+  WHERE Users_Users_id = _ID;
+  UPDATE Users SET Users_name = _name 
+  WHERE Users_id =  _ID;
+  RETURN 1;
 END$$
 
 #################################################################################################
@@ -373,10 +376,6 @@ BEGIN
   AND Inventory_id = _SoldID;
   INSERT INTO PIA.Sold(Users_Users_id, Clients_Clients_id, Sold_Price, Sold_Units, Sold_Date, Bought_Bought_id)
   VALUES(_userID, _ClientID, @productPrice, _SoldCant, NOW(), @productID);
-  RETURN 1;
-END$$
-CREATE FUNCTION ventaCliente() RETURNS INT UNSIGNED
-BEGIN
   RETURN 1;
 END$$
 

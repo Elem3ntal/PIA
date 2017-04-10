@@ -17,8 +17,8 @@ $sitio = "Invetary";
 </script>
 <div id="InventaryBody" class="well well-lg">
     <div id="InventaryHeader">
-        <h3 class="align-baseline">Inventary</h3>
         <div class="container-fluid">
+        <h3 class="align-baseline">Inventary</h3>
             <div class="dropdown navbar-right">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options <span class="glyphicon glyphicon-cog"></span></button>
                 <ul class="dropdown-menu">

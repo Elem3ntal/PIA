@@ -22,6 +22,7 @@ if($variable[0]=="0"){
         $sql = "CALL GetInventario(".$_SESSION['loginID'].");";
         $result = mysqli_query($db,$sql);
         echo "
+        <h3>Edit</h3>
 <input type='text' id='InventoryChangeID' value='' placeholder='ID' readonly>
 <input type='text' id='InventoryChangeDescript' value='' placeholder='Descript'>
 <input type='text' id='InventoryChangePrice' value='' placeholder='Price'>

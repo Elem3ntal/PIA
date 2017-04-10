@@ -42,21 +42,21 @@ catch (Throwable $t) {
                 <div id="InsertPurchases" class="tab-pane fade in active">
                     <div class="container-fluid">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a class="btn btn-info" data-toggle="tab" href="#agregarProductos">Agregar</a></li>
-                            <li><a class="btn btn-info" data-toggle="tab" href="#eliminarProductos">eliminar</a></li>
+                            <li class="active"><a class="btn btn-info" data-toggle="tab" href="#agregarProductos">Add</a></li>
+                            <li><a class="btn btn-info" data-toggle="tab" href="#eliminarProductos">Delete</a></li>
                         </ul>
 
                         <div class="tab-content well well-lg">
                             <div id="agregarProductos" class="tab-pane fade in active">
-                                <h3>Agregar</h3>
-                                <input type = "text" id="IngresoDescripcion" onkeypress="hideAlerts()" class = "box" placeholder="Descripcion"/>
-                                <input type = "text" id="IngresoCantidad" onkeypress="hideAlerts()" class = "box" placeholder="Cant"/>
-                                <input type = "text" id="IngresoPrecio" onkeypress="hideAlerts()" class = "box" placeholder="Precio"/>
-                                <input type = "text" id="IngresoVenta" onkeypress="hideAlerts()" class = "box" placeholder="Venta"/>
+                                <h3>Add</h3>
+                                <input type = "text" id="IngresoDescripcion" onkeypress="hideAlerts()" class = "box" placeholder="Descript"/>
+                                <input type = "text" id="IngresoCantidad" onkeypress="hideAlerts()" class = "box" placeholder="Quantity"/>
+                                <input type = "text" id="IngresoPrecio" onkeypress="hideAlerts()" class = "box" placeholder="Cost"/>
+                                <input type = "text" id="IngresoVenta" onkeypress="hideAlerts()" class = "box" placeholder="Price"/>
                                 <a class="btn btn-info" onclick="agregarFila()">( + )</a>
                             </div>
                             <div id="eliminarProductos" class="tab-pane fade">
-                                <h3>Eliminar</h3>
+                                <h3>Delete</h3>
                                 <input type = "text" id="EliminarID" onkeypress="hideAlerts()" class = "box" placeholder="ID to Delete"/>
                                 <a class="btn btn-info" onclick="eliminarID()">( - )</a>
                             </div>
@@ -66,16 +66,16 @@ catch (Throwable $t) {
                     <div class="container-fluid">
                         <section id="notificationArea">
                             <div class="alert alert-success" id="alertProductoIngresado">
-                                <strong>Producto Agregado!</strong> El producto ya se encuentra en inventario.
+                                <strong>Product has been add!</strong> The product is already in stock.
                             </div>
                             <div class="alert alert-warning" id="alertIncompleto"> <!--Producto incompleto-->
-                                <strong>Producto NO agregado!</strong> faltan valores por ingresar
+                                <strong>Product Not Added!</strong> Missing values to enter
                             </div>
                             <div class="alert alert-warning" id="alertEliminado"> <!--Producto Eliminado de la fila-->
-                                <strong>Producto No Agregado!</strong> Eliminado de la fila.
+                                <strong>Product Not Added!</strong> Removed from the queue.
                             </div>
                             <div class="alert alert-info" id="alertCompleto">
-                                <strong>Producto Agregado!</strong>ha sido añadido a la cola.
+                                <strong>Product added!</strong> Has been added to the queue.
                             </div>
                         </section>
                     </div>
@@ -83,12 +83,12 @@ catch (Throwable $t) {
                         <table id = "tablaIngresarCompras">
                             <tr>
                                 <th>ID(temp)</th>
-                                <th>Descripcion</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Venta</th>
-                                <th>Ganancia</th>
-                                <th>Fecha</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Cost</th>
+                                <th>Price</th>
+                                <th>Profit</th>
+                                <th>Date</th>
                             </tr>
                         </table>
                         <a class="btn btn-info" onclick="ingregarComprasAInventario()">Load to Inventory</a>
@@ -97,9 +97,9 @@ catch (Throwable $t) {
                 <div id="ViewPurchases" class="tab-pane fade">
                     <h3>Resume of the Month</h3>
                     <h4 id="ShowingDatePurchases">period</h4>
-                    <a type="button" class="btn btn-primary" id='year' onclick='PurchasefechaAnt()'>Anterior</a>
-                    <a type="button" class="btn btn-primary" id='Today' onclick='PurchasefechaToday()'>Hoy</a>
-                    <a type="button" class="btn btn-primary" id='mes' onclick='PurchasefechaSig()'>Siguiente</a>
+                    <a type="button" class="btn btn-primary" id='year' onclick='PurchasefechaAnt()'>Before</a>
+                    <a type="button" class="btn btn-primary" id='Today' onclick='PurchasefechaToday()'>Today</a>
+                    <a type="button" class="btn btn-primary" id='mes' onclick='PurchasefechaSig()'>After</a>
                     <div id="InnerBodyShowPurchases">
                     </div>
                     <script>PurchasefechaToday();</script>

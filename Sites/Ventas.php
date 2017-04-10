@@ -85,9 +85,9 @@ $sitio = "Sales";
         <div id="SalesViewSolds" class="tab-pane fade">
             <h3>Resume of the Month</h3>
             <h4 id="ShowingDate">period</h4>
-            <a type="button" class="btn btn-primary" id='year' onclick='fechaAnt()'>Anterior</a>
-            <a type="button" class="btn btn-primary" id='Today' onclick='fechaToday()'>Hoy</a>
-            <a type="button" class="btn btn-primary" id='mes' onclick='fechaSig()'>Siguiente</a>
+            <a type="button" class="btn btn-primary" id='year' onclick='fechaAnt()'>Before</a>
+            <a type="button" class="btn btn-primary" id='Today' onclick='fechaToday()'>Today</a>
+            <a type="button" class="btn btn-primary" id='mes' onclick='fechaSig()'>After</a>
             <div id="InnerBodyShowSolds">
             </div>
             <script>fechaToday();</script>

@@ -12,7 +12,7 @@ try{
     $sql = "CALL GetInventario(".$_SESSION['loginID'].");";
     $result = mysqli_query($db,$sql);
     echo "
-    <h3>Inventary</h3>
+    <h3>See</h3>
     <ul>
         <li id='InvProductos'></li>
         <li id='InvCant'></li>

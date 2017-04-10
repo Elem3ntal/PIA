@@ -245,6 +245,35 @@ mysqli_close($db);
     catch(err) {
         alert(err.message);
     }
+    //edit User data
+    function cargarDatosUsuarios(){
+        document.getElementById("RUEid").value=user0;
+        document.getElementById("RUEemail").value=user1;
+        document.getElementById("RUEestimatedUtility").value=user2;
+    }
+    function UserSetNewData(){
+        var name = document.getElementById("RUEid").value;
+        var email = document.getElementById("RUEemail").value;
+        var estiUti = document.getElementById("RUEestimatedUtility").value;
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                retorno = this.responseText;
+                if(retorno==1){
+                    NavBar(4);
+                }
+            }
+            else{
+            }
+        }
+        xmlhttp.open("GET","/PIA/Sites/registerNewUser.php?q=1,"+name+","+email+','+estiUti,true);
+        xmlhttp.send();
+    }
 </script>
 <div class='well well-lg'>
     <h3>Resume</h3>
@@ -255,6 +284,13 @@ mysqli_close($db);
             <li id="Usuario1"></li>
             <li id="Usuario2"></li>
         </ul>
+        <a type='button' class='btn btn-primary collapsed' data-toggle='collapse' data-target='#filtersChangeInvent' onclick='cargarDatosUsuarios();'>Edit user data <span class="glyphicon glyphicon-pencil"></span></a>
+        <div id='filtersChangeInvent' class='well well-sm fade collapse'>
+            <input type='text' id='RUEid' value='' placeholder='Name' onkeyup=''>
+            <input type='text' id='RUEemail' value='' placeholder='Email' onkeyup='' readonly>
+            <input type='text' id='RUEestimatedUtility' value='' placeholder='Estimated Utility' onkeyup=''>
+            <a type='button' class='btn btn-primary collapsed' data-toggle='collapse' data-target='#filtersChangeInvent' onclick='UserSetNewData()'>Save <span class="glyphicon glyphicon-record"></span></a>
+        </div>
     </div>
     <div class="alert alert-dismissable well well-sm fade in">
         <h4>what mean each color of rentability.</h4>
